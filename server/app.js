@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true });
 mongoose.connection.on('error', (err) => {
   logger.error('MongoDB connection error. Please make sure MongoDB is running');
   logger.debug(err);
