@@ -12,17 +12,16 @@ describe('Testing API', () => {
       chai.request(server)
         .get('/')
         .end((err, res) => {
-          expect(err).not.to.be.null;
           expect(res).to.have.status(404);
           done();
         });
     });
   });
 
-  describe('GET /pulse', () => {
+  describe('GET /api/index', () => {
     it('it should return 200 OK', (done) => {
       chai.request(server)
-        .get('/pulse')
+        .get('/api/index')
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);

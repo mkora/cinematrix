@@ -46,7 +46,11 @@ if (process.env.NODE_ENV === 'production') {
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useNewUrlParser: true });
+mongoose.connect(
+  process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+  { useNewUrlParser: true } // eslint-disable-line comma-dangle
+
+);
 mongoose.connection.on('error', (err) => {
   logger.error('MongoDB connection error. Please make sure MongoDB is running');
   logger.debug(err);
@@ -54,20 +58,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 /**
- * Test app
- */
-app.get('/pulse', (req, res) => {
-  logger.debug('It works!');
-  res.status(200);
-  // send json
-  return res.json({
-    ok: true,
-    data: 'It works!',
-  });
-});
-
-/**
- * API examples routes
+ * API routes
  */
 app.get('/api/index', indexController.index);
 

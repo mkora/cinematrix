@@ -1,13 +1,13 @@
 {
-  "name": "sourcerer-boilerplate",
+  "name": "cinematrix",
   "version": "1.0.0",
-  "description": "A boilerplate for Node / Express web apps",
+  "description": "Movies n Series",
   "main": "app.js",
   "scripts": {
     "start": "node ./server/",
     "devstart": "nodemon ./server/",
     "lint": "node_modules/eslint/bin/eslint.js .",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000 ./server/test/*"
   },
   "author": "mkora",
   "license": "MIT",

@@ -1,10 +1,10 @@
-# Sourcerer's Boilerplate
+# Movies n Series
 
-Node.js, Express, Mongo
+Node.js, Express, Mongo, React
 
 ## Overview
 
-A boilerplate for Node.js / Express backend applications
+a CRUD app with Express backend and React frontend of Movies n Series
 
 ## Notes
 
@@ -27,12 +27,6 @@ A boilerplate for Node.js / Express backend applications
 1. Make new one:
 
   ```
-  # Clone
-  git clone git@github.com:mkora/sourcerer-boilerplate.git
-  cd sourcerer-boilerplate
-
-  rm -rf .git && git init && npm i
-  
   # Install dependencies
   npm i
   ```
