@@ -14,49 +14,59 @@ a CRUD app with Express backend and React frontend of Movies n Series
 
 - Loads environment variables from `.env` file
 
-- Uses `error-handler`
-
-- Controllers should be added to `controllers` folder
-
-- Linter config extends airbnb's
-
-- Added `chai-http` to test api calls
-
 ## Quick Start
 
-1. Make new one:
+1. Install dependencies
 
   ```
-  # Install dependencies
   npm i
   ```
 
 2. Run the server
 
-  - Boot from the top-level directory
+  - Run the server & the client
 
   ```
   npm start
   ```
 
-  - Dev server (uses nodemon):
+  - Run the dev server (uses nodemon):
 
   ```
-  npm run devstart
+  npm run devserver
   ```
 
-  - Browse at http://localhost:3030
-
-3. Run tests
+  - Run the create-react-app server
 
   ```
+  npm run client
+  ```
+
+  - Run the api server
+
+  ```
+  npm run server
+  ```
+
+  - Browse at http://localhost:3000
+
+  - NOTE: to change default proxy value (http://localhost:3030) modify `client/package.json`
+
+3. Run scripts
+
+  ```
+  # Run build
+  npm run build
+  # Run tests
   npm test
   ```
 
 ## API Endpoints
 
-  Note: Use GET method to retrieve data
+  NOTE: Use GET method to retrieve data
+
+  NOTE: Add `Accept: application/json` header
+
+  - Call `/api/index` to retrieve a greeting
   
-  - Call /pulse to see 'It works!'
-  
-    For example, `/pulse`
+    For example, `/api/index`
