@@ -8,7 +8,8 @@ tmp
 bower_components
 
 # API keys and secrets
-.env
+.env*
+!.env.example
 
 # testing
 /coverage
@@ -16,6 +17,7 @@ bower_components
 
 # production
 build
+dist
 
 # misc
 *.seed
