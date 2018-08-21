@@ -1,4 +1,4 @@
-const logger = require('../utils/logger');
+import logger from '../utils/logger';
 
 exports.index = (req, res) => {
   logger.debug('Controller index, function index called');

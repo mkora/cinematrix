@@ -1,18 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const errorHandler = require('errorhandler');
-const morgan = require('morgan');
-const logger = require('./utils/logger');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import errorHandler from 'errorhandler';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
 
-/**
- * Load environment variables from .env file
- * where API keys and passwords are configured
- */
+import logger from './utils/logger';
+
 dotenv.load({
-  path: '.env.example',
+  path: '.env',
 });
 
 /**

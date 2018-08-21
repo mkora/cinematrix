@@ -1,6 +1,6 @@
-const process = require('child_process');
+const { spawn } = require('child_process');
 
-process.spawn('npm', ['start'], {
+spawn('npm', ['start'], {
   stdio: 'inherit',
   cwd: 'client',
   shell: true,
