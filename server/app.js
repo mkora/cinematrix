@@ -4,27 +4,14 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import errorHandler from 'errorhandler';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
 
+// eslint-disable-next-line no-unused-vars
+import dotenv from './utils/enver';
 import logger from './utils/logger';
+import indexController from './controllers/index';
 
-dotenv.load({
-  path: '.env',
-});
-
-/**
- * Controllers (route handlers)
- */
-const indexController = require('./controllers/index');
-
-/**
- * Create Express server
- */
 const app = express();
 
-/**
- * Configure Express
- */
 app.set('port', process.env.PORT || 3030);
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -39,9 +26,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('src/build'));
 }
 
-/**
- * Connect to MongoDB.
- */
 mongoose.Promise = global.Promise;
 mongoose.connect(
   process.env.MONGODB_URI || process.env.MONGOLAB_URI,
@@ -54,14 +38,8 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-/**
- * API routes
- */
 app.get('/api/index', indexController.index);
 
-/**
- * Error Handler
- */
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
