@@ -10,7 +10,8 @@
     "server": "npm run -s build && node dist/index.js",
     "devserver": "nodemon -w server --exec \"babel-node server\"",
     "lint": "node_modules/eslint/bin/eslint.js .",
-    "test": "NODE_ENV=test mocha --require babel-polyfill --require babel-core/register --timeout 10000 ./server/test/*"
+    "test": "NODE_ENV=test mocha --require babel-polyfill --require babel-core/register --timeout 10000 ./server/test/*",
+    "seeddb": "babel server -s -D -d dist && node dist/fixtures/index.js"
   },
   "author": "mkora",
   "license": "MIT",
@@ -27,6 +28,7 @@
     "express": "^4.16.3",
     "mongoose": "^5.2.8",
     "morgan": "^1.9.0",
+    "node-mongoose-fixtures": "^0.3.0",
     "winston": "^3.0.0-rc3"
   },
   "devDependencies": {
