@@ -47,6 +47,15 @@ const MovieSchema = new Schema({
   pic: {
     type: Buffer,
   },
+  source: {
+    type: String,
+  },
 });
+
+// eslint-disable-next-line func-names
+MovieSchema.statics.findOneByTitle = async function (title) {
+  const res = await this.findOne({ title: new RegExp(title, 'i') });
+  return res;
+};
 
 export default mongoose.model('Movie', MovieSchema);
