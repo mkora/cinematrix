@@ -1,6 +1,4 @@
-import fixtures from 'node-mongoose-fixtures';
 import mongoose from 'mongoose';
-import promise from 'bluebird';
 import enver from '../utils/enver'; // eslint-disable-line no-unused-vars
 import logger from '../utils/logger';
 
@@ -26,14 +24,12 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-promise.promisifyAll(fixtures.prototype);
-
-const fixtureSeed = async () => {
+const fixtureReference = async () => {
   try {
-    await fixtures({
-      Movie: movies,
-      Person: people,
-    }, mongoose);
+    /*
+      coming up
+    */
+    return true;    
     await Promise.all(casted.map(async ({ movie, person }) => {
       const movieObj = await Movie.findOneByTitle(movie);
       const personObj = await Person.findOneByName(person);
@@ -50,9 +46,9 @@ const fixtureSeed = async () => {
       directed.person = personObj._id; // eslint-disable-line no-underscore-dangle
       await directed.save();
     }));
-    logger.debug('All fixtures were saved');
+    logger.debug('All references were saved');
   } catch (err) {
-    logger.error('Mongo seeding faild');
+    logger.error('Mongo references seeding faild');
     logger.debug(err);
     process.exit();
   }
@@ -60,9 +56,10 @@ const fixtureSeed = async () => {
 
 const fixtureTrunc = async () => {
   try {
-    const result = fixtures.reset();
+    /*
+      coming up
+    */
     logger.debug('Collections were truncated');
-    return result;
   } catch (err) {
     logger.error('Mongo reset faild');
     logger.debug(err);
@@ -72,7 +69,9 @@ const fixtureTrunc = async () => {
 
 // DEBUG! just for now
 const debug = true;
-if (debug) {
-  fixtureTrunc();
-}
-fixtureSeed();
+(async () => {
+  if (debug) {
+    await fixtureTrunc();
+  }
+  await fixtureReference();
+})();
