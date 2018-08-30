@@ -11,4 +11,9 @@ const CastedSchema = new Schema({
   },
 });
 
+CastedSchema.statics.truncate = async function () {
+  const res = await this.remove({}).exec();
+  return res;
+};
+
 export default mongoose.model('Casted', CastedSchema);

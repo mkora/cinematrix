@@ -52,9 +52,13 @@ const MovieSchema = new Schema({
   },
 });
 
-// eslint-disable-next-line func-names
 MovieSchema.statics.findOneByTitle = async function (title) {
   const res = await this.findOne({ title: new RegExp(title, 'i') });
+  return res;
+};
+
+MovieSchema.statics.truncate = async function () {
+  const res = await this.remove({}).exec();
   return res;
 };
 

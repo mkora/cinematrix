@@ -11,4 +11,9 @@ const DirectedSchema = new Schema({
   },
 });
 
+DirectedSchema.statics.truncate = async function () {
+  const res = await this.remove({}).exec();
+  return res;
+};
+
 export default mongoose.model('Directed', DirectedSchema);

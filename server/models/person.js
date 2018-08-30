@@ -38,13 +38,17 @@ PersonSchema
   .virtual('name')
   .get(() => `${this.firstname} ${this.lastname}`);
 
-// eslint-disable-next-line func-names
 PersonSchema.statics.findOneByName = async function (name) {
   const [firstname, lastname] = [...name.split(' ')];
   const res = await this.findOne({
     firstname: new RegExp(firstname, 'i'),
     lastname: new RegExp(lastname, 'i'),
   });
+  return res;
+};
+
+PersonSchema.statics.truncate = async function () {
+  const res = await this.remove({}).exec();
   return res;
 };
 
