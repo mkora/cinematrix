@@ -66,7 +66,7 @@ export default [
   },
   {
     firstname: 'Robert',
-    lastname: 'Duval',
+    lastname: 'Duvall',
     birthday: new Date(1931, 1, 5),
     birthplace: 'San Diego, California, USA',
     source: 'https://www.imdb.com/name/nm0000380/',

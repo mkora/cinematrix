@@ -26,11 +26,37 @@ export async function truncateAll() {
 }
 
 export async function loadPeople() {
-  logger.debug('Coming soon');
+  try {
+    logger.debug('Loading people. Starting...');
+    await Promise.all(people.map(async (data) => {
+      const person = new Person();
+      person.set(data);
+      logger.debug(`Saving person ${data.firstname} ${data.lastname}...`);
+      await person.save();
+    }));
+    logger.debug('Loading people. Saved');
+  } catch (err) {
+    logger.error('Loading people. Mongo references seeding faild');
+    logger.debug(err);
+    process.exit();
+  }
 }
 
 export async function loadMovies() {
-  logger.debug('Coming soon');
+  try {
+    logger.debug('Loading movies. Starting...');
+    await Promise.all(movies.map(async (data) => {
+      const movie = new Movie();
+      movie.set(data);
+      logger.debug(`Saving movie ${data.title}...`);
+      await movie.save();
+    }));
+    logger.debug('Loading movies. Saved');
+  } catch (err) {
+    logger.error('Loading movies. Mongo references seeding faild');
+    logger.debug(err);
+    process.exit();
+  }
 }
 
 export async function loadCast() {
@@ -42,7 +68,7 @@ export async function loadCast() {
       const cast = new Casted();
       cast.movie = movieObj._id; // eslint-disable-line no-underscore-dangle
       cast.person = personObj._id; // eslint-disable-line no-underscore-dangle
-      logger.debug(`Saving ${person} to ${movie}...`);
+      logger.debug(`Saving cast ${person} in ${movie}...`);
       await cast.save();
     }));
     logger.debug('Loading cast. Saved');
@@ -55,14 +81,14 @@ export async function loadCast() {
 
 export async function loadDirected() {
   try {
-    logger.debug('Loading directed. Starting...');  
+    logger.debug('Loading directed. Starting...');
     await Promise.all(directed.map(async ({ movie, person }) => {
       const movieObj = await Movie.findOneByTitle(movie);
       const personObj = await Person.findOneByName(person);
       const directed = new Directed();
       directed.movie = movieObj._id; // eslint-disable-line no-underscore-dangle
       directed.person = personObj._id; // eslint-disable-line no-underscore-dangle
-      logger.debug(`Saving ${person} to ${movie}...`);
+      logger.debug(`Saving director ${person} for ${movie}...`);
       await directed.save();
     }));
     logger.debug('Loading directed. Saved');

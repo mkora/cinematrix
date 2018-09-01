@@ -14,14 +14,14 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-
 // DEBUG! just for now
-const debug = true;
-if (debug) {
-  loader.truncateAll();
-}
+(async () => {
+  const debug = true;
+  if (debug) {
+    await loader.truncateAll();
+  }
+  await Promise.all([loader.loadPeople(), loader.loadMovies()]);
+  await loader.loadDirected();
+  await loader.loadCast();
+})();
 
-loader.loadMovies();
-loader.loadPeople();
-// loader.loadCast();
-// loader.loadDirected();
