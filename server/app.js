@@ -8,7 +8,10 @@ import morgan from 'morgan';
 // eslint-disable-next-line no-unused-vars
 import dotenv from './utils/enver';
 import logger from './utils/logger';
-import indexController from './controllers/index';
+import MovieController from './controllers/movie';
+import PersonController from './controllers/person';
+import CastController from './controllers/cast';
+import DirectedController from './controllers/directed';
 
 const app = express();
 
@@ -38,14 +41,29 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-app.get('/api/index', indexController.index);
+app.get('/api/movies', MovieController.index);
+app.get('/api/movies/:id', MovieController.view);
+app.get('/api/movies/add', MovieController.add);
+app.get('/api/movies/:id/edit', MovieController.edit);
+app.get('/api/movies/:id/remove', MovieController.remove);
+
+app.get('/api/person', PersonController.index);
+app.get('/api/person/:id', PersonController.view);
+app.get('/api/person/add', PersonController.add);
+app.get('/api/person/:id/edit', PersonController.edit);
+app.get('/api/person/:id/remove', PersonController.remove);
+
+app.get('/api/cast/:personId/add/:movieId', CastController.add);
+app.get('/api/cast/:personId/remove/:movieId', CastController.remove);
+
+app.get('/api/directed/:personId/add/:movieId', DirectedController.add);
+app.get('/api/directed/:personId/remove/:movieId', DirectedController.remove);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
 
 app.use(errorHandler({
   log: (err, str, req, res) => {
