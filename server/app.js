@@ -43,21 +43,21 @@ mongoose.connection.on('error', (err) => {
 
 app.get('/api/movies', MovieController.index);
 app.get('/api/movies/:id', MovieController.view);
-app.get('/api/movies/add', MovieController.add);
-app.get('/api/movies/:id/edit', MovieController.edit);
-app.get('/api/movies/:id/remove', MovieController.remove);
+app.post('/api/movies/add', MovieController.add);
+app.put('/api/movies/:id/edit', MovieController.edit);
+app.delete('/api/movies/:id/remove', MovieController.remove);
 
 app.get('/api/person', PersonController.index);
 app.get('/api/person/:id', PersonController.view);
-app.get('/api/person/add', PersonController.add);
-app.get('/api/person/:id/edit', PersonController.edit);
-app.get('/api/person/:id/remove', PersonController.remove);
+app.post('/api/person/add', PersonController.add);
+app.put('/api/person/:id/edit', PersonController.edit);
+app.delete('/api/person/:id/remove', PersonController.remove);
 
-app.get('/api/cast/:personId/add/:movieId', CastController.add);
-app.get('/api/cast/:personId/remove/:movieId', CastController.remove);
+app.post('/api/cast/:personId/add/:movieId', CastController.add);
+app.delete('/api/cast/:personId/remove/:movieId', CastController.remove);
 
-app.get('/api/directed/:personId/add/:movieId', DirectedController.add);
-app.get('/api/directed/:personId/remove/:movieId', DirectedController.remove);
+app.post('/api/directed/:personId/add/:movieId', DirectedController.add);
+app.delete('/api/directed/:personId/remove/:movieId', DirectedController.remove);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
