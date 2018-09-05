@@ -8,10 +8,10 @@ import morgan from 'morgan';
 // eslint-disable-next-line no-unused-vars
 import dotenv from './utils/enver';
 import logger from './utils/logger';
-import MovieController from './controllers/movie';
-import PersonController from './controllers/person';
-import CastController from './controllers/cast';
-import DirectedController from './controllers/directed';
+import * as MovieController from './controllers/movie';
+import * as PersonController from './controllers/person';
+import * as CastController from './controllers/cast';
+import * as DirectedController from './controllers/directed';
 
 const app = express();
 
