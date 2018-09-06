@@ -50,6 +50,14 @@ const MovieSchema = new Schema({
   source: {
     type: String,
   },
+  directed: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Person',
+  }],
+  casted: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Person',
+  }],
 });
 
 MovieSchema.statics.findOneByTitle = async function (title) {

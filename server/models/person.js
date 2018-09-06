@@ -32,6 +32,14 @@ const PersonSchema = new Schema({
   source: {
     type: String,
   },
+  directed: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Movie',
+  }],
+  casted: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Movie',
+  }],
 });
 
 PersonSchema
