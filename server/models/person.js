@@ -1,4 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
+// eslint-disable-next-line no-unused-vars
+import Movie from './movie';
 
 const PersonSchema = new Schema({
   firstname: {
