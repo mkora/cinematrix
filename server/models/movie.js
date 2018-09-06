@@ -63,7 +63,7 @@ const MovieSchema = new Schema({
 });
 
 MovieSchema.statics.findOneByTitle = async function (title) {
-  const res = await this.findOne({ title: new RegExp(title, 'i') });
+  const res = await this.findOne({ title: new RegExp(`^${title}$`, 'i') });
   return res;
 };
 
