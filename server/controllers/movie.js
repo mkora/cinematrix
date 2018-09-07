@@ -4,7 +4,9 @@ import Movie from '../models/movie';
 export async function index(req, res, next) {
   try {
     const movie = await Movie
-      .find({});
+      .find({})
+      .populate('directed')
+      .populate('casted');
     logger.debug(`Looking for movies list. Found ${movie.length}`);
     return res.json({
       success: true,
@@ -18,14 +20,17 @@ export async function index(req, res, next) {
 export async function view(req, res, next) {
   const { id } = req.params;
   try {
-    const movie = await Movie.findById(id);
+    const movie = await Movie
+      .findById(id)
+      .populate('directed')
+      .populate('casted');
     logger.debug(`Looking for movie of ${id} id. Found?`);
     if (!movie) {
       const notFound = new Error('Movie Not Found');
       notFound.status = 404;
       throw notFound;
-    }    
-    logger.debug(movie);    
+    }
+    logger.debug(movie);
     return res.json({
       success: true,
       data: movie,

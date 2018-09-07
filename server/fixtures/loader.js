@@ -4,19 +4,13 @@ import movies from './data/movies';
 import people from './data/person';
 import casted from './data/cast';
 import directed from './data/directed';
-import {
-  Movie,
-  Person,
-  Directed,
-  Casted,
-} from '../models/';
+import Movie from '../models/movie';
+import Person from '../models/person';
 
 export async function truncateAll() {
   try {
     await Movie.truncate();
     await Person.truncate();
-    await Directed.truncate();
-    await Casted.truncate();
     logger.debug('Collections truncated');
   } catch (err) {
     logger.error('Mongo reset faild');
@@ -65,11 +59,9 @@ export async function loadCast() {
     await Promise.all(casted.map(async ({ movie, person }) => {
       const movieObj = await Movie.findOneByTitle(movie);
       const personObj = await Person.findOneByName(person);
-      const cast = new Casted();
-      cast.movie = movieObj._id; // eslint-disable-line no-underscore-dangle
-      cast.person = personObj._id; // eslint-disable-line no-underscore-dangle
+      movieObj.casted.push(personObj._id); // eslint-disable-line no-underscore-dangle
       logger.debug(`Saving cast ${person} in ${movie}...`);
-      await cast.save();
+      await movieObj.save();
     }));
     logger.debug('Loading cast. Saved');
   } catch (err) {
@@ -85,11 +77,9 @@ export async function loadDirected() {
     await Promise.all(directed.map(async ({ movie, person }) => {
       const movieObj = await Movie.findOneByTitle(movie);
       const personObj = await Person.findOneByName(person);
-      const directed = new Directed();
-      directed.movie = movieObj._id; // eslint-disable-line no-underscore-dangle
-      directed.person = personObj._id; // eslint-disable-line no-underscore-dangle
+      movieObj.directed.push(personObj._id); // eslint-disable-line no-underscore-dangle
       logger.debug(`Saving director ${person} for ${movie}...`);
-      await directed.save();
+      await movieObj.save();
     }));
     logger.debug('Loading directed. Saved');
   } catch (err) {
