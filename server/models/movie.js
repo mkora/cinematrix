@@ -19,7 +19,7 @@ const MovieSchema = new Schema({
   year: {
     type: Number,
     required: true,
-    min: 1920,
+    min: 1900,
     max: 2500,
   },
   country: {
