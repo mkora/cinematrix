@@ -13,19 +13,26 @@ const validateMongoID = (req) => {
 };
 
 const validateMovieData = (req) => {
-  const {
+  let {
     title,
     alsoknown,
-    year,
     country,
+    synopsis,
+  } = req.body;
+  const {
+    year,
     duration,
     imdb,
     episodes,
-    synopsis,
     source,
   } = req.body;
 
   let error = null;
+
+  title = validator.escape(title);
+  alsoknown = validator.escape(alsoknown);
+  country = validator.escape(country);
+  synopsis = validator.escape(synopsis);
 
   if (validator.isEmpty(title)
     || validator.isEmpty(year)
