@@ -14,6 +14,8 @@ a CRUD app with Express backend and React frontend of Movies n Series
 
 - Loads environment variables from `.env` file
 
+- Fixture's data provided by [imdb](https://www.imdb.com)
+
 ## Quick Start
 
 1. Install dependencies
@@ -63,10 +65,53 @@ a CRUD app with Express backend and React frontend of Movies n Series
 
 ## API Endpoints
 
-  NOTE: Use GET method to retrieve data
-
   NOTE: Add `Accept: application/json` header
-
-  - Call `/api/index` to retrieve a greeting
   
-    For example, `/api/index`
+#### Movies
+
+  ```
+  GET /api/movies
+  
+  GET /api/movies/:id
+  
+  POST /api/movies/add
+    params
+
+  PUT /api/movies/:id/edit
+    params
+
+  DELETE /api/movies/:id/remove
+  ```
+
+#### People
+
+  ```
+  GET /api/person
+
+  GET /api/person/:id
+
+  POST /api/person/add
+    params
+
+  PUT /api/person/:id/edit
+    params
+
+  DELETE /api/person/:id/remove
+  ```
+
+#### Cast
+
+  ```
+  POST /api/cast/:personId/add/:movieId
+
+  DELETE /api/cast/:personId/remove/:movieId
+  ```
+
+#### Directors
+
+  ```
+  POST /api/directed/:personId/add/:movieId
+
+  DELETE /api/directed/:personId/remove/:movieId
+  ```
+
