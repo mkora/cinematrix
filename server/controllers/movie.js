@@ -2,17 +2,24 @@ import validator from 'validator';
 import logger from '../utils/logger';
 import Movie from '../models/movie';
 
+const validatorError = (text) => {
+  const error = new Error(text);
+  error.status = 400;
+  return error;
+};
+
 const validateMongoID = (req) => {
   const { id } = req.params;
   if (!validator.isMongoId(id)) {
-    const err = new Error('ID is invalid. Please, provide a correct ID');
-    err.status = 400;
-    throw err;
+    validatorError('ID is invalid. Please, provide a correct ID');
   }
   return id;
 };
 
 const validateMovieData = (req) => {
+  if (Object.keys(req.body).length === 0) {
+    throw validatorError('Request is empty. Please, provide at least required params');
+  }
   let {
     title,
     alsoknown,
@@ -27,58 +34,62 @@ const validateMovieData = (req) => {
     source,
   } = req.body;
 
-  let error = null;
-
+  if (title !== undefined && validator.isEmpty(title)) {
+    throw validatorError('Title is required');
+  }
   title = validator.escape(title);
-  alsoknown = validator.escape(alsoknown);
-  country = validator.escape(country);
-  synopsis = validator.escape(synopsis);
-
-  if (validator.isEmpty(title)
-    || validator.isEmpty(year)
-    || validator.isEmpty(country)) {
-    error = new Error('Title, year and county are required');
-  }
-
   if (!validator.isLength(title, { min: 2, max: 500 })) {
-    error = new Error('Title length is invalid (max 2 and min 500 characters)');
+    throw validatorError('Title length is invalid (max 2 and min 500 characters)');
   }
-  if (!(alsoknown
-    && validator.isLength(alsoknown, { min: 2, max: 500 }))) {
-    error = new Error('Also known length is invalid (max 2 and min 500 characters)');
+
+  if (country === undefined || validator.isEmpty(country)) {
+    throw validatorError('Country is required');
+  }
+  if (country) {
+    country = validator.escape(country);
   }
   if (!(country
     && validator.isLength(country, { min: 2, max: 500 }))) {
-    error = new Error('Country known length is invalid (max 2 and min 500 characters)');
+    throw validatorError('Country known length is invalid (max 2 and min 500 characters)');
   }
 
+  if (year === undefined || validator.isEmpty(year)) {
+    throw validatorError('Year is required');
+  }
   if (!validator.isInt(year, { min: 1900, max: 2500 })) {
-    error = new Error('Year is invalid');
+    throw validatorError('Year is invalid');
   }
 
-  if (!(imdb
-    && validator.isDecimal(imdb, { decimal_digits: '0,10' }))) {
-    error = new Error('Imdb rating is invalid');
+  if (alsoknown) {
+    alsoknown = validator.escape(alsoknown);
+  }
+  if (alsoknown
+    && !validator.isLength(alsoknown, { min: 2, max: 500 })) {
+    throw validatorError('Also known length is invalid (max 2 and min 500 characters)');
   }
 
-  if (!(duration
-    && validator.isInt(duration, { min: 0, max: 10000 }))) {
-    error = new Error('Duration (in min) is invalid ()');
+  if (imdb
+    && !validator.isFloat(imdb, { min: 0.1, max: 10.0 })) {
+    throw validatorError('Imdb rating is invalid');
   }
 
-  if (!(episodes
-    && validator.isInt(episodes, { min: 1, max: 10000 }))) {
-    error = new Error('Number of episodes is invalid');
+  if (duration
+    && !validator.isInt(duration, { min: 0, max: 10000 })) {
+    throw validatorError('Duration (in min) is invalid');
   }
 
-  if (!(source
-    && validator.isURL(source))) {
-    error = new Error('Source URL is invalid');
+  if (episodes
+    && !validator.isInt(episodes, { min: 1, max: 10000 })) {
+    throw validatorError('Number of episodes is invalid');
   }
 
-  if (error) {
-    error.status = 400;
-    throw error;
+  if (synopsis) {
+    synopsis = validator.escape(synopsis);
+  }
+
+  if (source
+    && !validator.isURL(source)) {
+    throw validatorError('Source URL is invalid');
   }
 
   return {
@@ -119,9 +130,7 @@ export async function view(req, res, next) {
       .populate('casted');
     logger.debug(`Looking for movie of ${id} id. Found?`);
     if (!movie) {
-      const error = new Error('Movie not found. Please, check if provided data is correct');
-      error.status = 404;
-      throw error;
+      throw validatorError('Movie not found. Please, check if provided data is correct');
     }
     logger.debug(movie);
     return res.json({
@@ -178,9 +187,7 @@ export async function edit(req, res, next) {
     const movie = Movie.findByIdAndUpdate(id, data, { new: true });
     logger.debug(`Saving for movie of ${id} id. Found?`);
     if (!movie) {
-      const error = new Error('Movie not found. Please, check if provided data is correct');
-      error.status = 404;
-      throw error;
+      throw validatorError('Movie not found. Please, check if provided data is correct');
     }
     logger.debug(movie);
     return res
@@ -199,9 +206,7 @@ export async function remove(req, res, next) {
     const movie = Movie.findByIdAndDelete(id);
     logger.debug(`Deleting for movie of ${id} id. Found?`);
     if (!movie) {
-      const error = new Error('Movie not found. Please, check if provided data is correct');
-      error.status = 404;
-      throw error;
+      throw validatorError('Movie not found. Please, check if provided data is correct');
     }
     logger.debug(movie);
     return res
