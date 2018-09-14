@@ -1,20 +1,8 @@
 import validator from 'validator';
 import logger from '../utils/logger';
 import Movie from '../models/movie';
-
-const validatorError = (text) => {
-  const error = new Error(text);
-  error.status = 400;
-  return error;
-};
-
-const validateMongoID = (req) => {
-  const { id } = req.params;
-  if (!validator.isMongoId(id)) {
-    validatorError('ID is invalid. Please, provide a correct ID');
-  }
-  return id;
-};
+import validateMongoID from '../utils/validate/validateMongoID';
+import validatorError from '../utils/validate/validatorError';
 
 const validateMovieData = (req, required = true) => {
   if (Object.keys(req.body).length === 0) {
