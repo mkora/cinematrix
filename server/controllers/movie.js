@@ -16,7 +16,7 @@ const validateMongoID = (req) => {
   return id;
 };
 
-const validateMovieData = (req) => {
+const validateMovieData = (req, required = true) => {
   if (Object.keys(req.body).length === 0) {
     throw validatorError('Request is empty. Please, provide at least required params');
   }
@@ -34,29 +34,36 @@ const validateMovieData = (req) => {
     source,
   } = req.body;
 
-  if (title !== undefined && validator.isEmpty(title)) {
+  if (required
+    && (title !== undefined && validator.isEmpty(title))) {
     throw validatorError('Title is required');
   }
-  title = validator.escape(title);
-  if (!validator.isLength(title, { min: 2, max: 500 })) {
+  if (title) {
+    title = validator.escape(title);
+  }
+  if (title
+    && !validator.isLength(title, { min: 2, max: 500 })) {
     throw validatorError('Title length is invalid (max 2 and min 500 characters)');
   }
 
-  if (country === undefined || validator.isEmpty(country)) {
+  if (required
+    && (country === undefined || validator.isEmpty(country))) {
     throw validatorError('Country is required');
   }
   if (country) {
     country = validator.escape(country);
   }
-  if (!(country
-    && validator.isLength(country, { min: 2, max: 500 }))) {
+  if (country
+    && !validator.isLength(country, { min: 2, max: 500 })) {
     throw validatorError('Country known length is invalid (max 2 and min 500 characters)');
   }
 
-  if (year === undefined || validator.isEmpty(year)) {
+  if (required
+    && (year === undefined || validator.isEmpty(year))) {
     throw validatorError('Year is required');
   }
-  if (!validator.isInt(year, { min: 1900, max: 2500 })) {
+  if (year
+    && !validator.isInt(year, { min: 1900, max: 2500 })) {
     throw validatorError('Year is invalid');
   }
 
@@ -93,15 +100,15 @@ const validateMovieData = (req) => {
   }
 
   return {
-    title,
-    alsoknown,
-    year,
-    country,
-    duration,
-    imdb,
-    episodes,
-    source,
-    synopsis,
+    ...(title !== undefined ? { title } : {}),
+    ...(alsoknown !== undefined ? { alsoknown } : {}),
+    ...(year !== undefined ? { year } : {}),
+    ...(country !== undefined ? { country } : {}),
+    ...(duration !== undefined ? { duration } : {}),
+    ...(imdb !== undefined ? { imdb } : {}),
+    ...(episodes !== undefined ? { episodes } : {}),
+    ...(source !== undefined ? { source } : {}),
+    ...(synopsis !== undefined ? { synopsis } : {}),
   };
 };
 
@@ -183,13 +190,15 @@ export async function add(req, res, next) {
 export async function edit(req, res, next) {
   try {
     const id = validateMongoID(req);
-    const data = validateMovieData(req);
-    const movie = Movie.findByIdAndUpdate(id, data, { new: true });
+    const data = validateMovieData(req, false);
+    console.log(data);
+    const movie = await Movie.findByIdAndUpdate(id, data, { new: true });
     logger.debug(`Saving for movie of ${id} id. Found?`);
     if (!movie) {
       throw validatorError('Movie not found. Please, check if provided data is correct');
     }
     logger.debug(movie);
+    console.log(movie);
     return res
       .json({
         success: true,
