@@ -191,7 +191,6 @@ export async function edit(req, res, next) {
   try {
     const id = validateMongoID(req);
     const data = validateMovieData(req, false);
-    console.log(data);
     const movie = await Movie.findByIdAndUpdate(id, data, { new: true });
     logger.debug(`Saving for movie of ${id} id. Found?`);
     if (!movie) {
