@@ -211,14 +211,13 @@ export async function edit(req, res, next) {
 export async function remove(req, res, next) {
   try {
     const id = validateMongoID(req);
-    const movie = Movie.findByIdAndDelete(id);
+    const movie = await Movie.findByIdAndDelete(id);
     logger.debug(`Deleting for movie of ${id} id. Found?`);
     if (!movie) {
       throw validatorError('Movie not found. Please, check if provided data is correct');
     }
     logger.debug(movie);
     return res
-      .status(204)
       .json({
         success: true,
         data: null,
