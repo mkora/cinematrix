@@ -23,6 +23,8 @@ const PersonSchema = new Schema({
   birthplace: {
     type: String,
     trim: true,
+    min: 2,
+    max: 500,
   },
   deathday: {
     type: Date,
