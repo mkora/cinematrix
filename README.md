@@ -75,10 +75,24 @@ a CRUD app with Express backend and React frontend of Movies n Series
   GET /api/movies/:id
   
   POST /api/movies/add
-    params
+    BODY
+      {
+        "title": "movie name",
+        "country": "country name",
+        "year": "1999",
+        "alsoknown": "other name",
+        "imdb": "5.1",
+        "duration": "190",
+        "episodes": "1",
+        "synopsis": "synopsis",
+        "source": "http://imdb.com/url-something-here"
+    }
 
   PUT /api/movies/:id/edit
-    params
+    BODY
+      {
+        "title": "new movie name"
+      }
 
   DELETE /api/movies/:id/remove
   ```
@@ -113,5 +127,5 @@ a CRUD app with Express backend and React frontend of Movies n Series
   POST /api/directed/:personId/add/:movieId
 
   DELETE /api/directed/:personId/remove/:movieId
-  ```
+```
 
