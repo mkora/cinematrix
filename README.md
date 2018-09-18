@@ -100,17 +100,17 @@ a CRUD app with Express backend and React frontend of Movies n Series
 #### People
 
   ```
-  GET /api/person
+  GET /api/people
 
-  GET /api/person/:id
+  GET /api/people/:id
 
-  POST /api/person/add
+  POST /api/people/add
     params
 
-  PUT /api/person/:id/edit
+  PUT /api/people/:id/edit
     params
 
-  DELETE /api/person/:id/remove
+  DELETE /api/people/:id/remove
   ```
 
 #### Cast

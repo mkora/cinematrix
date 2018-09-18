@@ -47,11 +47,11 @@ app.post('/api/movies/add', MovieController.add);
 app.put('/api/movies/:id/edit', MovieController.edit);
 app.delete('/api/movies/:id/remove', MovieController.remove);
 
-app.get('/api/person', PersonController.index);
-app.get('/api/person/:id', PersonController.view);
-app.post('/api/person/add', PersonController.add);
-app.put('/api/person/:id/edit', PersonController.edit);
-app.delete('/api/person/:id/remove', PersonController.remove);
+app.get('/api/people', PersonController.index);
+app.get('/api/people/:id', PersonController.view);
+app.post('/api/people/add', PersonController.add);
+app.put('/api/people/:id/edit', PersonController.edit);
+app.delete('/api/people/:id/remove', PersonController.remove);
 
 app.post('/api/cast/:personId/add/:movieId', CastController.add);
 app.delete('/api/cast/:personId/remove/:movieId', CastController.remove);
@@ -67,7 +67,7 @@ app.use((req, res, next) => {
 
 app.use(errorHandler({
   log: (err, str, req, res) => {
-    logger.error(str, err, req);
+    // logger.error(str, err, req);
     res.status(err.code || 500);
   },
 }));
