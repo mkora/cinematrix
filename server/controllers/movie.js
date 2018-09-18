@@ -23,7 +23,7 @@ const validateMovieData = (req, required = true) => {
   } = req.body;
 
   if (required
-    && (title !== undefined && validator.isEmpty(title))) {
+    && (title === undefined || validator.isEmpty(title))) {
     throw validatorError('Title is required');
   }
   if (title) {

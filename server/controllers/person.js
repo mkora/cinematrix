@@ -20,7 +20,7 @@ const validatePersonData = (req, required = true) => {
   } = req.body;
 
   if (required
-    && (firstname !== undefined && validator.isEmpty(firstname))) {
+    && (firstname === undefined || validator.isEmpty(firstname))) {
     throw validatorError('Firstname is required');
   }
   if (firstname) {
@@ -32,7 +32,7 @@ const validatePersonData = (req, required = true) => {
   }
 
   if (required
-    && (lastname !== undefined && validator.isEmpty(lastname))) {
+    && (lastname === undefined || validator.isEmpty(lastname))) {
     throw validatorError('Lastname is required');
   }
   if (lastname) {
