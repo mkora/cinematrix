@@ -60,8 +60,10 @@ export async function loadCast() {
       const movieObj = await Movie.findOneByTitle(movie);
       const personObj = await Person.findOneByName(person);
       movieObj.casted.push(personObj._id); // eslint-disable-line no-underscore-dangle
+      personObj.casted.push(movieObj._id); // eslint-disable-line no-underscore-dangle
       logger.debug(`Saving cast ${person} in ${movie}...`);
       await movieObj.save();
+      await personObj.save();
     }));
     logger.debug('Loading cast. Saved');
   } catch (err) {
@@ -78,8 +80,10 @@ export async function loadDirected() {
       const movieObj = await Movie.findOneByTitle(movie);
       const personObj = await Person.findOneByName(person);
       movieObj.directed.push(personObj._id); // eslint-disable-line no-underscore-dangle
+      personObj.directed.push(movieObj._id); // eslint-disable-line no-underscore-dangle
       logger.debug(`Saving director ${person} for ${movie}...`);
       await movieObj.save();
+      await personObj.save();
     }));
     logger.debug('Loading directed. Saved');
   } catch (err) {
