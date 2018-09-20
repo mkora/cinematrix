@@ -1,7 +1,6 @@
 import validator from 'validator';
 import logger from '../utils/logger';
 import Person from '../models/person';
-import validateMongoID from '../utils/validate/validateMongoID';
 import validatorError from '../utils/validate/validatorError';
 
 const validatePersonData = (req, required = true) => {
@@ -74,6 +73,14 @@ const validatePersonData = (req, required = true) => {
     ...(deathday !== undefined ? { deathday } : {}),
     ...(source !== undefined ? { source } : {}),
   };
+};
+
+const validateMongoID = (req) => {
+  const { id } = req.params;
+  if (!validator.isMongoId(id)) {
+    validatorError('Person ID is invalid. Please, provide a correct ID');
+  }
+  return id;
 };
 
 export async function index(req, res, next) {

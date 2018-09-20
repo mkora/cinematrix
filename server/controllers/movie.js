@@ -1,7 +1,6 @@
 import validator from 'validator';
 import logger from '../utils/logger';
 import Movie from '../models/movie';
-import validateMongoID from '../utils/validate/validateMongoID';
 import validatorError from '../utils/validate/validatorError';
 
 const validateMovieData = (req, required = true) => {
@@ -98,6 +97,14 @@ const validateMovieData = (req, required = true) => {
     ...(source !== undefined ? { source } : {}),
     ...(synopsis !== undefined ? { synopsis } : {}),
   };
+};
+
+const validateMongoID = (req) => {
+  const { id } = req.params;
+  if (!validator.isMongoId(id)) {
+    validatorError('Movie ID is invalid. Please, provide a correct ID');
+  }
+  return id;
 };
 
 export async function index(req, res, next) {
