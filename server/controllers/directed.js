@@ -1,13 +1,97 @@
+import isMongoId from 'validator/lib/isMongoId';
 import logger from '../utils/logger';
+import Movie from '../models/movie';
+import Person from '../models/person';
+import validatorError from '../utils/validate/validatorError';
+
+const validateDirectedData = (req) => {
+  const {
+    personId,
+    movieId,
+  } = req.params;
+  if (!isMongoId(personId)) {
+    validatorError('Person ID is invalid. Please, provide a correct ID');
+  }
+  if (!isMongoId(movieId)) {
+    validatorError('Movie ID is invalid. Please, provide a correct ID');
+  }
+  return {
+    personId,
+    movieId,
+  };
+};
 
 export async function add(req, res, next) {
-  return res.json({
-    message: `add ${req.params.personId} as director to ${req.params.movieId} movie`,
-  });
+  try {
+    const {
+      personId,
+      movieId,
+    } = validateDirectedData(req);
+
+    logger.debug(`Saving the director ${personId} of the movie ${movieId}`);
+
+    const person = await Person.findById(personId);
+    if (!person) {
+      throw validatorError('Person not found. Please, check if provided data is correct');
+    }
+    const movie = await Movie.findById(movieId);
+    if (!movie) {
+      throw validatorError('Movie not found. Please, check if provided data is correct');
+    }
+
+    person.directed.push(movieId);
+    await person.save();
+
+    movie.directed.push(movieId);
+    await movie.save();
+
+    logger.debug(`The director ${person.name} of the ${movie.title} movie was saved`);
+
+    return res
+      .status(201)
+      .json({
+        success: true,
+        data: null,
+      });
+  } catch (err) {
+    return next(err);
+  }
 }
 
 export async function remove(req, res, next) {
-  return res.json({
-    message: `remove ${req.params.personId} as director from ${req.params.movieId} movie`,
-  });
+  try {
+    const {
+      personId,
+      movieId,
+    } = validateDirectedData(req);
+
+    logger.debug(`Removing the director ${personId} of the movie ${movieId}`);
+
+    const person = await Person.findById(personId);
+    if (!person) {
+      throw validatorError('Person not found. Please, check if provided data is correct');
+    }
+    const movie = await Movie.findById(movieId);
+    if (!movie) {
+      throw validatorError('Movie not found. Please, check if provided data is correct');
+    }
+
+    const directed = person.directed.filter(v => v !== movieId);
+    person.directed(directed);
+    await person.save();
+
+    const directors = movie.directed.filter(v => v !== personId);
+    movie.directed(directors);
+    await movie.save();
+
+    logger.debug(`The director ${person.name} of the ${movie.title} movie was removed`);
+
+    return res
+      .json({
+        success: true,
+        data: null,
+      });
+  } catch (err) {
+    return next(err);
+  }
 }
