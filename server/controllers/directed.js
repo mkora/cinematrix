@@ -42,10 +42,10 @@ export async function add(req, res, next) {
     person.directed.push(movieId);
     await person.save();
 
-    movie.directed.push(movieId);
+    movie.directed.push(personId);
     await movie.save();
 
-    logger.debug(`The director ${person.name} of the ${movie.title} movie was saved`);
+    logger.debug(`Director ${person.name} of the ${movie.title} movie was saved`);
 
     return res
       .status(201)
@@ -76,15 +76,15 @@ export async function remove(req, res, next) {
       throw validatorError('Movie not found. Please, check if provided data is correct');
     }
 
-    const directed = person.directed.filter(v => v !== movieId);
-    person.directed(directed);
+    // eslint-disable-next-line eqeqeq
+    person.directed = person.directed.filter(v => v != movieId);
     await person.save();
 
-    const directors = movie.directed.filter(v => v !== personId);
-    movie.directed(directors);
+    // eslint-disable-next-line eqeqeq
+    movie.directed = movie.directed.filter(v => v != personId);
     await movie.save();
 
-    logger.debug(`The director ${person.name} of the ${movie.title} movie was removed`);
+    logger.debug(`Director ${person.name} of the ${movie.title} movie was removed`);
 
     return res
       .json({
