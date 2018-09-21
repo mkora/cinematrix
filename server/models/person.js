@@ -48,7 +48,9 @@ const PersonSchema = new Schema({
 
 PersonSchema
   .virtual('name')
-  .get(() => `${this.firstname} ${this.lastname}`);
+  .get(function () {
+    return `${this.firstname} ${this.lastname}`;
+  });
 
 PersonSchema.statics.findOneByName = async function (name) {
   const [firstname, lastname] = [...name.split(' ')];
