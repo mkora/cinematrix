@@ -3,6 +3,9 @@
   "rules": {
     "consistent-return": 0,
     "no-shadow": 0,
-    "no-console": 0
+    "no-console": 0,
+    "func-names": 0,
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0
   }
 }
