@@ -76,23 +76,23 @@ a CRUD app with Express backend and React frontend of Movies n Series
   
   POST /api/movies/add
     BODY
-      {
-        "title": "movie name",
-        "country": "country name",
-        "year": "1999",
-        "alsoknown": "other name",
-        "imdb": "5.1",
-        "duration": "190",
-        "episodes": "1",
-        "synopsis": "synopsis",
-        "source": "http://imdb.com/url-something-here"
-    }
+    {
+      "title": "Movie title",
+      "country": "Country",
+      "year": "1999",
+      "alsoknown": "The other name",
+      "imdb": "5.1",
+      "duration": "190",
+      "episodes": "1",
+      "synopsis": "Synopsis",
+      "source": "http://imdb.com/url-something-here"
+  }
 
   PUT /api/movies/:id/edit
     BODY
-      {
-        "title": "new movie name"
-      }
+    {
+      "title": "New movie title"
+    }
 
   DELETE /api/movies/:id/remove
   ```
@@ -105,10 +105,21 @@ a CRUD app with Express backend and React frontend of Movies n Series
   GET /api/people/:id
 
   POST /api/people/add
-    params
+    BODY
+    {
+      "firstname": "John",
+      "lastname": "Doe",
+      "birthday": "1930-10-05T00:00:00.000Z",
+      "deathday": "1999-12-05T00:00:00.000Z",
+      "birthplace": "Town, State, Country",
+      "source": "http://imdb.com/url-something-here"
+    }
 
   PUT /api/people/:id/edit
-    params
+    BODY
+    {
+      "firstname": "John Jr"
+    }
 
   DELETE /api/people/:id/remove
   ```
