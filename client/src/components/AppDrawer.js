@@ -115,7 +115,7 @@ class AppDrawer extends Component {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {...this.children}
+          {this.props.children}
         </main>
       </div>
     );

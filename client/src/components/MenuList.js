@@ -23,7 +23,7 @@ const styles = theme => ({
 
 class NestedList extends Component {
   state = {
-    open: true,
+    open: [],
   };
 
   handleClick = () => {
@@ -37,16 +37,13 @@ class NestedList extends Component {
       <div className={classes.root}>
         <List>
           <ListItem button>
-            <ListItemIcon>
+            { /* <ListItemIcon> */ }
               { /*add icon image here or remove a parent too */ }
-            </ListItemIcon>
+            { /* </ListItemIcon> */ }
             <ListItemText inset primary="Item One" />
           </ListItem>
 
           <ListItem button onClick={this.handleClick}>
-            <ListItemIcon>
-            { /*add icon image here or remove a parent too */ }
-            </ListItemIcon>
             <ListItemText inset primary="Item Two: Parent" />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
@@ -54,9 +51,6 @@ class NestedList extends Component {
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                { /*add icon image here or remove a parent too */ }
-                </ListItemIcon>
                 <ListItemText inset primary="Item Two: Child One" />
               </ListItem>
             </List>
@@ -68,9 +62,6 @@ class NestedList extends Component {
         <List>
 
           <ListItem button onClick={this.handleClick}>
-            <ListItemIcon>
-            { /*add icon image here or remove a parent too */ }
-            </ListItemIcon>
             <ListItemText inset primary="Item One: Parent" />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
@@ -78,9 +69,6 @@ class NestedList extends Component {
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
-                <ListItemIcon>
-                { /*add icon image here or remove a parent too */ }
-                </ListItemIcon>
                 <ListItemText inset primary="Item One: Child One" />
               </ListItem>
             </List>
