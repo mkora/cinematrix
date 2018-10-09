@@ -23,11 +23,13 @@ const styles = theme => ({
 
 class NestedList extends Component {
   state = {
-    open: [],
+    open: [true, true],
   };
 
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+  handleClick = (i) => (e) => {
+    const open = this.state.open;
+    open[i] = !open[i];
+    this.setState({ open });
   };
 
   render() {
@@ -43,12 +45,12 @@ class NestedList extends Component {
             <ListItemText inset primary="Item One" />
           </ListItem>
 
-          <ListItem button onClick={this.handleClick}>
+          <ListItem button onClick={this.handleClick(0)}>
             <ListItemText inset primary="Item Two: Parent" />
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+            {this.state.open[0] ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+          <Collapse in={this.state.open[0]} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
                 <ListItemText inset primary="Item Two: Child One" />
@@ -61,12 +63,12 @@ class NestedList extends Component {
 
         <List>
 
-          <ListItem button onClick={this.handleClick}>
+          <ListItem button onClick={this.handleClick(1)}>
             <ListItemText inset primary="Item One: Parent" />
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+            {this.state.open[1] ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
 
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+          <Collapse in={this.state.open[1]} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
                 <ListItemText inset primary="Item One: Child One" />
