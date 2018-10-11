@@ -9,6 +9,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
+import { NavLink } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -20,6 +21,53 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 4,
   },
 });
+
+const links = [
+  {
+    to: '',
+    title: 'Home',
+  },
+  {
+    title: 'Movies',
+    children: [
+      {
+        to: 'movies',
+        title: 'All movies',
+      },
+      {
+        to: 'add-movie',
+        title: 'Add movie',
+      },      
+    ]
+  },
+  {
+    title: 'Actors',
+    children: [
+      {
+        to: 'actors',
+        title: 'All actors',
+      },
+      {
+        to: 'add-movie',
+        title: 'Add actor',
+      },      
+    ]
+  },
+  {
+    title: 'Directors',
+    children: [
+      {
+        to: 'directors',
+        title: 'All directors',
+      },
+      {
+        to: 'add-director',
+        title: 'Add director',
+      },      
+    ]
+  },
+   
+];
 
 class NestedList extends Component {
   state = {
@@ -34,48 +82,58 @@ class NestedList extends Component {
 
   render() {
     const { classes } = this.props;
+    const { open } = this.state;
+
+    let tabIndex = 0;
 
     return (
       <div className={classes.root}>
-        <List>
-          <ListItem button>
-            { /* <ListItemIcon> */ }
-              { /*add icon image here or remove a parent too */ }
-            { /* </ListItemIcon> */ }
-            <ListItemText inset primary="Item One" />
-          </ListItem>
+        {links.map((link) =>
+          <List key={link.to}>
 
-          <ListItem button onClick={this.handleClick(0)}>
-            <ListItemText inset primary="Item Two: Parent" />
-            {this.state.open[0] ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-
-          <Collapse in={this.state.open[0]} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
-                <ListItemText inset primary="Item Two: Child One" />
+            {link.children === undefined &&
+              <ListItem button>
+                { /* <ListItemIcon> */ }
+                  { /*add icon image here or remove a parent too */ }
+                { /* </ListItemIcon> */ }
+                { /* <ListItemText inset primary={link.title} /> */ }
+                <NavLink 
+                  to={`/${link.to}`} 
+                  activeClassName="active"
+                  exact>
+                  {link.title}
+                </NavLink>
               </ListItem>
-            </List>
-          </Collapse>
-        </List>
+            }
+
+            {link.children !== undefined &&
+              <div>
+                <ListItem button onClick={this.handleClick(tabIndex)}>
+                  <ListItemText inset primary={link.title} />
+                  {open[tabIndex] ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={open[tabIndex++]} timeout="auto" unmountOnExit>
+                {link.children.map((sublink) =>
+                  <List component="div" disablePadding>
+                    <ListItem button className={classes.nested}>
+                      { /* <ListItemText inset primary={sublink.title} /> */ }
+                      <NavLink 
+                        to={`/${sublink.to}`} 
+                        activeClassName="active"
+                        exact>
+                        {sublink.title}
+                      </NavLink>                      
+                    </ListItem>
+                  </List>
+                )}
+                </Collapse>
+              </div>
+            }
+          </List>
+        )}
 
         <Divider />
-
-        <List>
-
-          <ListItem button onClick={this.handleClick(1)}>
-            <ListItemText inset primary="Item One: Parent" />
-            {this.state.open[1] ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-
-          <Collapse in={this.state.open[1]} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
-                <ListItemText inset primary="Item One: Child One" />
-              </ListItem>
-            </List>
-          </Collapse>
-        </List>        
+        
       </div>
     );
   }
