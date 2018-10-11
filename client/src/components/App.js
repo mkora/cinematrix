@@ -13,7 +13,6 @@ import AppDrawer from './AppDrawer';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
   },
 });
 
@@ -78,12 +77,12 @@ class App extends Component {
           <AppDrawer title="Something in here. Does it change?">
             <Typography noWrap>{'Something in here too. Actually, not just something, but something special.'}</Typography>
           </AppDrawer>
+          <Switch>
+            {routes.map((route) =>
+              <Route {...route} />
+            )}
+          </Switch>
         </div>
-        <Switch>
-          {routes.map((route) => 
-            <Route {...route} />
-          )}
-        </Switch>        
       </Router>
     );
   }

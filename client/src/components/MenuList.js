@@ -69,7 +69,7 @@ const links = [
    
 ];
 
-class NestedList extends Component {
+class MenuList extends Component {
   state = {
     open: [true, true],
   };
@@ -88,59 +88,53 @@ class NestedList extends Component {
 
     return (
       <div className={classes.root}>
-        {links.map((link) =>
-          <List key={link.to}>
-
-            {link.children === undefined &&
-              <ListItem button>
-                { /* <ListItemIcon> */ }
-                  { /*add icon image here or remove a parent too */ }
-                { /* </ListItemIcon> */ }
-                { /* <ListItemText inset primary={link.title} /> */ }
-                <NavLink 
-                  to={`/${link.to}`} 
-                  activeClassName="active"
-                  exact>
-                  {link.title}
-                </NavLink>
-              </ListItem>
-            }
-
-            {link.children !== undefined &&
-              <div>
+        <List>
+          {links.map((link, key) =>
+            link.children === undefined ? (
+              <ListItem button key={link.to}>
+                  { /* <ListItemIcon> */ }
+                    { /*add icon image here or remove a parent too */ }
+                  { /* </ListItemIcon> */ }
+                  { /* <ListItemText inset primary={link.title} /> */ }
+                  <NavLink
+                    to={`/${link.to}`}
+                    activeClassName="active"
+                    exact>
+                    {link.title}
+                  </NavLink>
+                </ListItem>
+              ) : (
+              <div key={`${link.to}${key}`}>
                 <ListItem button onClick={this.handleClick(tabIndex)}>
                   <ListItemText inset primary={link.title} />
                   {open[tabIndex] ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={open[tabIndex++]} timeout="auto" unmountOnExit>
-                {link.children.map((sublink) =>
                   <List component="div" disablePadding>
-                    <ListItem button className={classes.nested}>
-                      { /* <ListItemText inset primary={sublink.title} /> */ }
-                      <NavLink 
-                        to={`/${sublink.to}`} 
-                        activeClassName="active"
-                        exact>
-                        {sublink.title}
-                      </NavLink>                      
-                    </ListItem>
+                    {link.children.map((sublink) =>
+                      <ListItem button className={classes.nested} key={sublink.to}>
+                        { /* <ListItemText inset primary={sublink.title} /> */ }
+                        <NavLink
+                          to={`/${sublink.to}`}
+                          activeClassName="active"
+                          exact>
+                          {sublink.title}
+                        </NavLink> 
+                      </ListItem>
+                    )}
                   </List>
-                )}
                 </Collapse>
               </div>
-            }
-          </List>
-        )}
-
-        <Divider />
-        
+            )
+          )}
+        </List>
       </div>
     );
   }
 }
 
-NestedList.propTypes = {
+MenuList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NestedList);
+export default withStyles(styles)(MenuList);
