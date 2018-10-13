@@ -5,6 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -15,7 +16,6 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 440,
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -37,14 +37,14 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      position: 'relative',
-    },
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: drawerWidth + theme.spacing.unit * 3,
+    },    
   },
 });
 
@@ -58,7 +58,7 @@ class AppDrawer extends Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.root}>
@@ -81,7 +81,6 @@ class AppDrawer extends Component {
         <Hidden mdUp>
           <Drawer
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={this.state.mobileOpen}
             onClose={this.handleDrawerToggle}
             classes={{
@@ -92,7 +91,8 @@ class AppDrawer extends Component {
             }}
           >
             <div>
-              <div className={classes.toolbar} />
+              <div className={classes.toolbar} /> {/** Add somekinda logo */}
+              <Divider />
               <MenuList />
             </div>
           </Drawer>
@@ -107,7 +107,8 @@ class AppDrawer extends Component {
             }}
           >
             <div>
-              <div className={classes.toolbar} />
+              <div className={classes.toolbar} /> {/** Add somekinda logo */}
+              <Divider /> 
               <MenuList />
             </div>
           </Drawer>
