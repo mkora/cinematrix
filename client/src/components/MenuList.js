@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import Divider from '@material-ui/core/Divider';
 import { NavLink } from 'react-router-dom';
 
 const styles = theme => ({
@@ -20,6 +18,16 @@ const styles = theme => ({
   nested: {
     paddingLeft: theme.spacing.unit * 4,
   },
+  active: {
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightMedium * 1.5,
+  },
+  link: {
+    textDecoration: 'inherit',
+  },
+  title: {
+    fontWeight: theme.typography.fontWeightMedium * 1.5,
+  }
 });
 
 const links = [
@@ -66,12 +74,11 @@ const links = [
       },      
     ]
   },
-   
 ];
 
 class MenuList extends Component {
   state = {
-    open: [true, true],
+    open: [true, true, true],
   };
 
   handleClick = (i) => (e) => {
@@ -91,36 +98,36 @@ class MenuList extends Component {
         <List>
           {links.map((link, key) =>
             link.children === undefined ? (
-              <ListItem button key={link.to}>
-                  { /* <ListItemIcon> */ }
-                    { /*add icon image here or remove a parent too */ }
-                  { /* </ListItemIcon> */ }
-                  { /* <ListItemText inset primary={link.title} /> */ }
-                  <NavLink
-                    to={`/${link.to}`}
-                    activeClassName="active"
-                    exact>
-                    {link.title}
-                  </NavLink>
-                </ListItem>
+                <NavLink
+                  key={link.to}
+                  to={`/${link.to}`}
+                  activeClassName={classes.active}
+                  className={classes.link}
+                  exact
+                  >
+                  <ListItem button>
+                    <ListItemText primary={link.title} className={classes.title} />
+                  </ListItem>
+                </NavLink>
               ) : (
               <div key={`${link.to}${key}`}>
                 <ListItem button onClick={this.handleClick(tabIndex)}>
-                  <ListItemText inset primary={link.title} />
+                  <ListItemText primary={link.title} className={classes.title} />
                   {open[tabIndex] ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={open[tabIndex++]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {link.children.map((sublink) =>
-                      <ListItem button className={classes.nested} key={sublink.to}>
-                        { /* <ListItemText inset primary={sublink.title} /> */ }
                         <NavLink
+                          key={sublink.to}
                           to={`/${sublink.to}`}
-                          activeClassName="active"
+                          activeClassName={classes.active}
+                          className={classes.link}
                           exact>
-                          {sublink.title}
+                          <ListItem button className={classes.nested}>
+                            <ListItemText primary={sublink.title} />
+                          </ListItem>
                         </NavLink> 
-                      </ListItem>
                     )}
                   </List>
                 </Collapse>
