@@ -15,18 +15,18 @@ const styles = theme => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
-  nested: {
-    paddingLeft: theme.spacing.unit * 4,
+  nestedListItem: {
+    paddingLeft: theme.spacing.unit * 5,
   },
   active: {
     color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightMedium * 1.5,
+    fontWeight: theme.typography.fontWeightMedium,
   },
-  link: {
+  navLink: {
     textDecoration: 'inherit',
   },
-  title: {
-    fontWeight: theme.typography.fontWeightMedium * 1.5,
+  listItemTitle: {
+    fontWeight: theme.typography.fontWeightMedium,
   }
 });
 
@@ -102,17 +102,23 @@ class MenuList extends Component {
                   key={link.to}
                   to={`/${link.to}`}
                   activeClassName={classes.active}
-                  className={classes.link}
+                  className={classes.navLink}
                   exact
                   >
                   <ListItem button>
-                    <ListItemText primary={link.title} className={classes.title} />
+                    <ListItemText
+                      primary={link.title}
+                      classes={{primary:classes.listItemTitle}}
+                    />
                   </ListItem>
                 </NavLink>
               ) : (
               <div key={`${link.to}${key}`}>
                 <ListItem button onClick={this.handleClick(tabIndex)}>
-                  <ListItemText primary={link.title} className={classes.title} />
+                  <ListItemText
+                    primary={link.title}
+                    classes={{primary:classes.listItemTitle}}
+                  />
                   {open[tabIndex] ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={open[tabIndex++]} timeout="auto" unmountOnExit>
@@ -122,9 +128,9 @@ class MenuList extends Component {
                           key={sublink.to}
                           to={`/${sublink.to}`}
                           activeClassName={classes.active}
-                          className={classes.link}
+                          className={classes.navLink}
                           exact>
-                          <ListItem button className={classes.nested}>
+                          <ListItem button className={classes.nestedListItem}>
                             <ListItemText primary={sublink.title} />
                           </ListItem>
                         </NavLink> 
