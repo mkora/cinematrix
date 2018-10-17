@@ -58,7 +58,11 @@ class AppDrawer extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      toolbarTitle,
+      menuList,
+    } = this.props;
 
     return (
       <div className={classes.root}>
@@ -73,7 +77,7 @@ class AppDrawer extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              {this.props.title}
+              {toolbarTitle}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -109,7 +113,7 @@ class AppDrawer extends Component {
             <div>
               <div className={classes.toolbar} /> {/** Add somekinda logo */}
               <Divider /> 
-              <MenuList />
+              <MenuList data={menuList} />
             </div>
           </Drawer>
         </Hidden>
@@ -126,7 +130,8 @@ class AppDrawer extends Component {
 AppDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
+  toolbarTitle: PropTypes.string.isRequired,
+  menuList: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(AppDrawer);

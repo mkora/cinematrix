@@ -16,6 +16,52 @@ const styles = theme => ({
   },
 });
 
+const menu = [
+  {
+    to: '',
+    title: 'Home',
+  },
+  {
+    title: 'Movies',
+    children: [
+      {
+        to: 'movies',
+        title: 'All movies',
+      },
+      {
+        to: 'add-movie',
+        title: 'Add movie',
+      },
+    ]
+  },
+  {
+    title: 'Actors',
+    children: [
+      {
+        to: 'actors',
+        title: 'All actors',
+      },
+      {
+        to: 'add-movie',
+        title: 'Add actor',
+      },
+    ]
+  },
+  {
+    title: 'Directors',
+    children: [
+      {
+        to: 'directors',
+        title: 'All directors',
+      },
+      {
+        to: 'add-director',
+        title: 'Add director',
+      },
+    ]
+  },
+];
+
 const routes = [
   {
     key: 'home',
@@ -74,7 +120,7 @@ class App extends Component {
     return (
       <Router>
         <div className={this.props.classes.root}>
-          <AppDrawer title="Something in here. Does it change?">
+          <AppDrawer toolbarTitle="Movies and TV Shows" menuList={menu}>
             <Switch>
               {routes.map((route) =>
                 <Route {...route} />

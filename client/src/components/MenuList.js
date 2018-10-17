@@ -30,52 +30,6 @@ const styles = theme => ({
   }
 });
 
-const links = [
-  {
-    to: '',
-    title: 'Home',
-  },
-  {
-    title: 'Movies',
-    children: [
-      {
-        to: 'movies',
-        title: 'All movies',
-      },
-      {
-        to: 'add-movie',
-        title: 'Add movie',
-      },      
-    ]
-  },
-  {
-    title: 'Actors',
-    children: [
-      {
-        to: 'actors',
-        title: 'All actors',
-      },
-      {
-        to: 'add-movie',
-        title: 'Add actor',
-      },      
-    ]
-  },
-  {
-    title: 'Directors',
-    children: [
-      {
-        to: 'directors',
-        title: 'All directors',
-      },
-      {
-        to: 'add-director',
-        title: 'Add director',
-      },      
-    ]
-  },
-];
-
 class MenuList extends Component {
   state = {
     open: [true, true, true],
@@ -88,7 +42,7 @@ class MenuList extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, data } = this.props;
     const { open } = this.state;
 
     let tabIndex = 0;
@@ -96,7 +50,7 @@ class MenuList extends Component {
     return (
       <div className={classes.root}>
         <List>
-          {links.map((link, key) =>
+          {data.map((link, key) =>
             link.children === undefined ? (
                 <NavLink
                   key={link.to}
@@ -148,6 +102,7 @@ class MenuList extends Component {
 
 MenuList.propTypes = {
   classes: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles)(MenuList);
