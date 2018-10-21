@@ -49,15 +49,8 @@ class ContentExtentionPanel extends Component {
   render() {
     const {
       classes,
-      // data,
+      data,
     } = this.props;
-    const data = {
-      summary: 'Movie title 1, year, country', // Actor full name
-      mainDetails: 'Movie synopsis', // Actor bio
-      secondaryDetails: 'eq pic || duration & number of episodes', // Actor pic || additial info
-      editAction: 'movie-edit',
-      deleteAction: 'movie-edit',
-    };
     return (
       <div className={classes.root}>
         <ExpansionPanel>
@@ -94,6 +87,8 @@ class ContentExtentionPanel extends Component {
 
 ContentExtentionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
+  // TODO: add fields [summary,mainDetails,secondaryDetails, editAction, deleteAction,]
+  data: PropTypes.object.isRequired,  
 };
 
 export default withStyles(styles)(ContentExtentionPanel);
