@@ -16,6 +16,7 @@ const styles = theme => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightMedium,
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -30,7 +31,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   column: {
-    flexBasis: '33.33%',
+    flexBasis: '49%',
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -55,7 +56,7 @@ class ContentExtentionPanel extends Component {
       <div className={classes.root}>
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>{data.title}</Typography>
+            <Typography className={classes.heading}>{data.summary}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className={classes.column}>

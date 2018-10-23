@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import withRoot from '../withRoot';
 import AppDrawer from './AppDrawer';
+import MovieContentList from './MovieContentList';
 
 const styles = theme => ({
   root: {
@@ -75,7 +76,7 @@ const routes = [
     key: 'movies',
     path: '/movies',
     component: () => (
-      <div>TODO: Add all movies component</div>
+      <MovieContentList />
     ),
   },
   {
