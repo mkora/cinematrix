@@ -56,18 +56,24 @@ class ContentExtentionPanel extends Component {
       <div className={classes.root}>
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>{data.summary}</Typography>
+            <Typography className={classes.heading}>{data.heading}</Typography>
+            <Typography>{data.subHeading}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className={classes.column}>
               <Typography>
-                {data.mainDetails}
+                {data.firstColumn}
               </Typography>
             </div>
             <div className={classes.column}>
-            <Typography>
-                {data.secondaryDetails}
-              </Typography>              
+              <Typography>
+                {data.secondColumn}
+              </Typography>
+              {data.credits &&
+                <Typography>
+                  {data.credits}
+                </Typography>
+              }
             </div>
           </ExpansionPanelDetails>
           <Divider />
@@ -78,7 +84,7 @@ class ContentExtentionPanel extends Component {
             </Button>
             <Button size="small" color="primary"> {/* add handler*/ }
               Delete
-            </Button>          
+            </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
       </div>
@@ -88,7 +94,7 @@ class ContentExtentionPanel extends Component {
 
 ContentExtentionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
-  // TODO: add fields [summary,mainDetails,secondaryDetails, editAction, deleteAction,]
+  // TODO: add fields [heading, subHeading, credits, firstColumn, secondColumn, editAction, deleteAction,]
   data: PropTypes.object.isRequired,  
 };
 

@@ -14,20 +14,20 @@ class MovieContentList extends Component {
     try {
       const data = await movies();
       if(data.success) {
-        /**
-         * TODO: parse data as:
-            {
-              summary: 'Movie title 1, year', // Actor full name
-              mainDetails: 'eq pic || duration & number of episodes #1,country', // Actor pic || additial info
-              secondaryDetails: 'Movie synopsis 1', // Actor bio
-              editAction: 'movie-edit/1',
-              deleteAction: 'movie-edit/1',
-            },
-         *
-         *
-         */
+        const list = data.data.map((v) => {
+          const isMovie = v.episodes == 1 ? true : false;
+          return {
+            heading: v.title,
+            subHeading: `${v.country} | ${v.duration} min | (genre - TBD) | ${(isMovie ? `Movie` : `TV Series (${v.year})`)}`,
+            firstColumn: `Creators: ${v.directed}; Stars: ${v.casted}`, // Links?
+            secondColumn: v.synopsis,
+            credits: v.source, // Link?
+            editAction: `movie-edit/${v._id}`,
+            deleteAction: `movie-edit/${v._id}`,
+          };
+        });
         this.setState({
-          data,
+          data: list,
           isError: false,
           isLoading: false,
         });

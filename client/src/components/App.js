@@ -121,7 +121,7 @@ class App extends Component {
     return (
       <Router>
         <div className={this.props.classes.root}>
-          <AppDrawer toolbarTitle="Movies and TV Shows" menuList={menu}>
+          <AppDrawer toolbarTitle="Movies and TV Series" menuList={menu}>
             <Switch>
               {routes.map((route) =>
                 <Route {...route} />
