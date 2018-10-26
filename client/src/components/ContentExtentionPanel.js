@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import ParagraphList from './ParagraphList';
 
 const styles = theme => ({
   root: {
@@ -61,9 +62,7 @@ class ContentExtentionPanel extends Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className={classes.column}>
-              <Typography>
-                {data.firstColumn}
-              </Typography>
+              <ParagraphList data={data.firstColumn} />
             </div>
             <div className={classes.column}>
               <Typography>
