@@ -17,6 +17,7 @@ const styles = theme => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
+    marginRight: 10,
     fontWeight: theme.typography.fontWeightMedium,
   },
   secondaryHeading: {
@@ -58,7 +59,7 @@ class ContentExtentionPanel extends Component {
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>{data.heading}</Typography>
-            <Typography>{data.subHeading}</Typography>
+            <Typography className={classes.secondaryHeading}>{data.subHeading}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className={classes.column}>
@@ -68,10 +69,12 @@ class ContentExtentionPanel extends Component {
               <Typography>
                 {data.secondColumn}
               </Typography>
-              {data.credits &&
-                <Typography>
-                  {data.credits}
-                </Typography>
+              {data.credits && <div>
+                  <Typography className={classes.secondaryHeading}>Credits:</Typography>
+                  <Typography gutterBottom>
+                    {data.credits}
+                  </Typography>
+                </div>
               }
             </div>
           </ExpansionPanelDetails>

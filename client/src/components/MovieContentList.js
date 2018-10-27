@@ -18,11 +18,11 @@ class MovieContentList extends Component {
           const isMovie = v.episodes === 1 ? true : false;
           return {
             heading: v.title,
-            subHeading: `${v.country} | ${v.duration} min | (genre - TBD) | ${(isMovie ? `Movie` : `TV Series (${v.year})`)}`,
-            firstColumn: [ // obj?
-              `Creators: ${v.directed.map(d => ` ${d.firstname} ${d.lastname}`)}`, // Links?
-              `Stars: ${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,  // Links?
-            ],
+            subHeading: `| ${v.country} | ${v.duration} min | (genre - TBD) | ${(isMovie ? `Movie` : `TV Series (${v.year})`)}`,
+            firstColumn: {
+              Creators: `${v.directed.map(d => ` ${d.firstname} ${d.lastname}`)}`, // Links?
+              Stars: `${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,  // Links?
+            },
             secondColumn: v.synopsis,
             credits: v.source, // Link?
             editAction: `movie-edit/${v._id}`,
