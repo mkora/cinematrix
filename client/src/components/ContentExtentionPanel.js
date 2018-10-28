@@ -49,6 +49,16 @@ const styles = theme => ({
 });
 
 class ContentExtentionPanel extends Component {
+  state = {
+    expended: false,
+  };
+
+  handleCancelClick = () => {
+    this.setState({
+      expended: !this.state.expended,
+    });
+  }
+
   render() {
     const {
       classes,
@@ -56,7 +66,7 @@ class ContentExtentionPanel extends Component {
     } = this.props;
     return (
       <div className={classes.root}>
-        <ExpansionPanel>
+        <ExpansionPanel expanded={this.state.expended} onChange={this.handleCancelClick}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>{data.heading}</Typography>
             <Typography className={classes.secondaryHeading}>{data.subHeading}</Typography>
@@ -80,7 +90,7 @@ class ContentExtentionPanel extends Component {
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
-            <Button size="small">Cancel</Button> {/* add handler*/ }
+            <Button size="small" onClick={this.handleCancelClick}>Cancel</Button>
             <Button size="small" color="primary"> {/* add handler*/ }
               Edit
             </Button>
