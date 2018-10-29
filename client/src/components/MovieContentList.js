@@ -18,7 +18,7 @@ class MovieContentList extends Component {
           const isMovie = v.episodes === 1 ? true : false;
           return {
             heading: v.title,
-            subHeading: `| ${v.country} | ${v.duration} min | (genre - TBD) | ${(isMovie ? `Movie` : `TV Series (${v.year})`)}`,
+            subHeading: `| ${v.country} | ${v.duration} min | (genre - TBD) | ${(isMovie ? `Movie` : `TV Series (${v.year})`)} | IMDB: ${v.imdb}`,
             firstColumn: {
               Creators: `${v.directed.map(d => ` ${d.firstname} ${d.lastname}`)}`, // Links?
               Stars: `${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,  // Links?

@@ -29,9 +29,6 @@ const styles = theme => ({
     height: 20,
     width: 20,
   },
-  details: {
-    alignItems: 'center',
-  },
   column: {
     flexBasis: '49%',
   },
@@ -76,12 +73,12 @@ class ContentExtentionPanel extends Component {
               <ParagraphList data={data.firstColumn} />
             </div>
             <div className={classes.column}>
-              <Typography>
+              <Typography gutterBottom>
                 {data.secondColumn}
               </Typography>
               {data.credits && <div>
                   <Typography className={classes.secondaryHeading}>Credits:</Typography>
-                  <Typography gutterBottom>
+                  <Typography>
                     {data.credits}
                   </Typography>
                 </div>
