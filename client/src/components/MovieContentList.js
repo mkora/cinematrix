@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ContentList from './ContentList';
 import { movies } from  '../api';
+
+const styles = theme => ({
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+});
 
 class MovieContentList extends Component {
   state = {
@@ -18,7 +27,8 @@ class MovieContentList extends Component {
           const isMovie = v.episodes === 1 ? true : false;
           return {
             heading: v.title,
-            subHeading: `| ${v.country} | ${v.duration} min | (genre - TBD) | ${(isMovie ? `Movie` : `TV Series (${v.year})`)} | IMDB: ${v.imdb}`,
+            subHeading: `| ${v.country} | ${v.duration} min | (genre - TBD) | 
+              ${(isMovie ? `Movie` : `TV Series (${v.year})`)} | IMDB: ${v.imdb['$numberDecimal']}`,
             firstColumn: {
               Creators: `${v.directed.map(d => ` ${d.firstname} ${d.lastname}`)}`, // Links?
               Stars: `${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,  // Links?
@@ -55,11 +65,17 @@ class MovieContentList extends Component {
       data,
       isLoading,
       isError
-    }  = this.state;
+    } = this.state;
+
+    const {
+      classes,
+    } = this.props;
 
     if (isLoading) {
       return (
-        <div>LOADING...</div>
+        <div className={classes.loading}>
+          <CircularProgress size={65} />
+        </div>
       );
     }
 
@@ -76,7 +92,8 @@ class MovieContentList extends Component {
 }
 
 ContentList.propTypes = {
+  classes: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
 };
 
-export default MovieContentList;
+export default withStyles(styles)(MovieContentList);
