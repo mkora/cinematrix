@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import ContentList from './ContentList';
 import { movies } from  '../api';
-
-const styles = theme => ({
-  loading: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-});
 
 class MovieContentList extends Component {
   state = {
@@ -64,36 +54,17 @@ class MovieContentList extends Component {
     const {
       data,
       isLoading,
-      isError
+      isError,
     } = this.state;
 
-    const {
-      classes,
-    } = this.props;
-
-    if (isLoading) {
-      return (
-        <div className={classes.loading}>
-          <CircularProgress size={65} />
-        </div>
-      );
-    }
-
-    if (isError) {
-      return (
-        <div>ERROR... Check out console.log</div>
-      );
-    }
-
     return (
-      <ContentList data={data} />
+      <ContentList
+        data={data}
+        isLoading={isLoading}
+        isError={isError}
+      />
     );
   }
 }
 
-ContentList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.array.isRequired,
-};
-
-export default withStyles(styles)(MovieContentList);
+export default MovieContentList;
