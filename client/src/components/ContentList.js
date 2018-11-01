@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ContentExtentionPanel from './ContentExtentionPanel';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import ContentSnackbar from './ContentSnackbar';
 
 const styles = theme => ({
   root: {
@@ -21,6 +23,8 @@ class ContentList extends Component {
       data,
       isLoading,
       isError,
+      isOpenSnack,
+      onSnackClose,
     } = this.props;
 
     if (isLoading) {
@@ -33,7 +37,20 @@ class ContentList extends Component {
 
     if (isError) {
       return (
-        <div>ERROR... Check out console.log</div>
+        <Snackbar
+            anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={isOpenSnack}
+          autoHideDuration={6000}>
+            <ContentSnackbar
+              variant="error"
+              className={classes.margin}
+              message="Oops! Something went wrong! Please, try again later."
+              onClose={onSnackClose}
+            />
+        </Snackbar>
       );
     }
 
@@ -50,6 +67,8 @@ ContentList.propTypes = {
   data: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isError: PropTypes.bool.isRequired,
+  isOpenSnack: PropTypes.bool.isRequired,
+  onSnackClose: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ContentList);

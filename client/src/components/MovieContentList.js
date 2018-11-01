@@ -7,6 +7,7 @@ class MovieContentList extends Component {
     data: [],
     isError: false, // SnackBars with messages -> but I don't want it here
     isLoading: false, // CircularProgress -> but I don't want it here
+    isOpenSnack: false,
   };
 
   async componentDidMount() {
@@ -33,11 +34,13 @@ class MovieContentList extends Component {
           data: list,
           isError: false,
           isLoading: false,
+          isOpenSnack: false,
         });
       } else {
         this.setState({
           isError: true,
           isLoading: false,
+          isOpenSnack: true,
         });
         console.log(data.error);
       }
@@ -45,16 +48,22 @@ class MovieContentList extends Component {
       this.setState({
         isError: true,
         isLoading: false,
+        isOpenSnack: true,
       });
       console.log(err);
     }
   }
+
+  handleSnackCloseClick = () => {  
+    this.setState({ isOpenSnack: false });
+  };
 
   render() {
     const {
       data,
       isLoading,
       isError,
+      isOpenSnack,
     } = this.state;
 
     return (
@@ -62,6 +71,8 @@ class MovieContentList extends Component {
         data={data}
         isLoading={isLoading}
         isError={isError}
+        isOpenSnack={isOpenSnack}
+        onSnackClose={this.handleSnackCloseClick}
       />
     );
   }
