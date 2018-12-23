@@ -30,7 +30,7 @@ const styles = theme => ({
   }
 });
 
-class MenuList extends Component {
+class AppMenuList extends Component {
   state = {
     open: [true, true, true],
   };
@@ -100,9 +100,9 @@ class MenuList extends Component {
   }
 }
 
-MenuList.propTypes = {
+AppMenuList.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
 };
 
-export default withStyles(styles)(MenuList);
+export default withStyles(styles)(AppMenuList);

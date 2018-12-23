@@ -10,7 +10,7 @@ const styles = theme => ({
   },
 });
 
-const ParagraphList = (props) => {
+const ContentParagraphList = (props) => {
   const {
     data,
     classes,
@@ -39,8 +39,8 @@ const ParagraphList = (props) => {
   return <Typography>{data}</Typography>;
 }
 
-ParagraphList.propTypes = {
+ContentParagraphList.propTypes = {
   data: PropTypes.any.isRequired,
 };
 
-export default withStyles(styles)(ParagraphList);
+export default withStyles(styles)(ContentParagraphList);

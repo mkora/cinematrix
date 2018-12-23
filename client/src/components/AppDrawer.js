@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
-import MenuList from './MenuList';
+import AppMenuList from './AppMenuList';
 
 const drawerWidth = 240;
 
@@ -97,7 +97,7 @@ class AppDrawer extends Component {
             <div>
               <div className={classes.toolbar} /> {/** Add somekinda logo */}
               <Divider />
-              <MenuList />
+              <AppMenuList />
             </div>
           </Drawer>
         </Hidden>
@@ -113,7 +113,7 @@ class AppDrawer extends Component {
             <div>
               <div className={classes.toolbar} /> {/** Add somekinda logo */}
               <Divider /> 
-              <MenuList data={menuList} />
+              <AppMenuList data={menuList} />
             </div>
           </Drawer>
         </Hidden>

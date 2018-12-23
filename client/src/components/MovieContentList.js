@@ -5,8 +5,8 @@ import { movies } from  '../api';
 class MovieContentList extends Component {
   state = {
     data: [],
-    isError: false, // SnackBars with messages -> but I don't want it here
-    isLoading: false, // CircularProgress -> but I don't want it here
+    isError: false,
+    isLoading: false,
     isOpenSnack: false,
   };
 
