@@ -25,7 +25,9 @@ class MovieContentList extends Component {
               Stars: `${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,  // Links?
             },
             secondColumn: v.synopsis,
-            credits: v.source, // Link?
+            credits: {
+              Credits: v.source, // Link?
+            },
             editAction: `movie-edit/${v._id}`,
             deleteAction: `movie-edit/${v._id}`,
           };

@@ -76,12 +76,9 @@ class ContentExtentionPanel extends Component {
               <Typography gutterBottom>
                 {data.secondColumn}
               </Typography>
-              {data.credits && <div>
-                  <Typography className={classes.secondaryHeading}>Credits:</Typography>
-                  <Typography>
-                    {data.credits}
-                  </Typography>
-                </div>
+              {
+                data.credits &&
+                <ContentParagraphList data={data.credits} />
               }
             </div>
           </ExpansionPanelDetails>
