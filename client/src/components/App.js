@@ -10,6 +10,7 @@ import {
 import withRoot from '../withRoot';
 import AppDrawer from './AppDrawer';
 import MovieContentList from './MovieContentList';
+import PeopleContentList from './PeopleContentList'
 
 const styles = theme => ({
   root: {
@@ -90,7 +91,7 @@ const routes = [
     key: 'actors',
     path: '/actors',
     component: () => (
-      <div>TODO: Add all actors component</div>
+      <PeopleContentList type="actor" />
     ),
   },
   {
@@ -104,7 +105,7 @@ const routes = [
     key: 'directors',
     path: '/directors',
     component: () => (
-      <div>TODO: Add all directors component</div>
+      <PeopleContentList type="director" />
     ),
   },
   {

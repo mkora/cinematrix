@@ -9,7 +9,8 @@ export async function movies() {
   }
 }
 
-export async function people() {
+// TODO: add constant here
+export async function people(type = "actor") {
   try {
     const data = await axios.get('/api/people');;
     return Promise.resolve(data.data);
