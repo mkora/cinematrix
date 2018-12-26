@@ -48,15 +48,16 @@ app.put('/api/movies/:id/edit', MovieController.edit);
 app.delete('/api/movies/:id/remove', MovieController.remove);
 
 app.get('/api/people', PersonController.index);
-app.post('/api/people/:type', PersonController.index);
 app.get('/api/people/:id', PersonController.view);
 app.post('/api/people/add', PersonController.add);
 app.put('/api/people/:id/edit', PersonController.edit);
 app.delete('/api/people/:id/remove', PersonController.remove);
 
+app.get('/api/cast', CastController.index);
 app.post('/api/cast/:personId/add/:movieId', CastController.add);
 app.delete('/api/cast/:personId/remove/:movieId', CastController.remove);
 
+app.get('/api/directed', DirectedController.index);
 app.post('/api/directed/:personId/add/:movieId', DirectedController.add);
 app.delete('/api/directed/:personId/remove/:movieId', DirectedController.remove);
 

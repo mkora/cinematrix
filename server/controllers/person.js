@@ -85,7 +85,6 @@ const validateMongoID = (req) => {
 
 export async function index(req, res, next) {
   try {
-    const { type } = req.params;
     const people = await Person
       .find({})
       .populate('directed')

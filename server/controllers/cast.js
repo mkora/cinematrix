@@ -21,6 +21,10 @@ const validateCastData = (req) => {
   };
 };
 
+export async function index(req, res, next) {
+  
+}
+
 export async function add(req, res, next) {
   try {
     const {
