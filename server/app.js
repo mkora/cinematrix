@@ -48,6 +48,7 @@ app.put('/api/movies/:id/edit', MovieController.edit);
 app.delete('/api/movies/:id/remove', MovieController.remove);
 
 app.get('/api/people', PersonController.index);
+app.post('/api/people/:type', PersonController.index);
 app.get('/api/people/:id', PersonController.view);
 app.post('/api/people/add', PersonController.add);
 app.put('/api/people/:id/edit', PersonController.edit);
