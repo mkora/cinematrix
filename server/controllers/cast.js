@@ -22,7 +22,23 @@ const validateCastData = (req) => {
 };
 
 export async function index(req, res, next) {
-  
+  try {
+    const people = await Person
+      .find({})
+      .populate('casted')
+      .where('casted').nor([
+        { casted: { $exists: false } },
+        { casted: { $size: 0 } },
+      ]);
+
+    logger.debug(`Looking for actors list. Found ${people.length}`);
+    return res.json({
+      success: true,
+      data: people,
+    });
+  } catch (err) {
+    return next(err);
+  }
 }
 
 export async function add(req, res, next) {

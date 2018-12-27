@@ -23,7 +23,22 @@ const validateDirectedData = (req) => {
 
 
 export async function index(req, res, next) {
-  
+  try {
+    const people = await Person
+      .find({})
+      .populate('directed')
+      .where('directed').nor([
+        { directed: { $exists: false } },
+        { directed: { $size: 0 } },
+      ]);
+    logger.debug(`Looking for actors list. Found ${people.length}`);
+    return res.json({
+      success: true,
+      data: people,
+    });
+  } catch (err) {
+    return next(err);
+  }
 }
 
 export async function add(req, res, next) {
