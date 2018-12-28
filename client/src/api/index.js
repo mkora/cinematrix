@@ -9,10 +9,15 @@ export async function movies() {
   }
 }
 
-// TODO: add constant here
-export async function people(type = "actor") {
+export const typeActorList = "actor";
+
+export const typeDirectorList = "director";
+
+export async function people(type = typeActorList) {
   try {
-    const data = await axios.get('/api/people');;
+    const data = (type === typeActorList) 
+      ? await axios.get('/api/cast')
+      : await axios.get('/api/directed');
     return Promise.resolve(data.data);
   } catch (error) {
     return Promise.reject(error.response);

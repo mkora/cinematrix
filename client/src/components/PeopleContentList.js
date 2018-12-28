@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ContentList from './ContentList';
-import { people } from  '../api';
+import * as api from  '../api';
 
 class PeopleContentList extends Component {
   state = {
@@ -16,7 +17,7 @@ class PeopleContentList extends Component {
         type
       } = this.props;
   
-      const data = await people(type);
+      const data = await api.people(type);
       if(data.success) {
         const list = data.data.map((v) => {
           return {
@@ -80,5 +81,9 @@ class PeopleContentList extends Component {
     );
   }
 }
+
+PeopleContentList.propTypes = {
+  type: PropTypes.oneOf([api.typeActorList, api.typeDirectorList]).isRequired,
+};
 
 export default PeopleContentList;
