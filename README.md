@@ -127,6 +127,8 @@ a CRUD app with Express backend and React frontend of Movies n Series
 #### Cast
 
   ```
+  GET /api/cast
+
   POST /api/cast/:personId/add/:movieId
 
   DELETE /api/cast/:personId/remove/:movieId
@@ -135,6 +137,8 @@ a CRUD app with Express backend and React frontend of Movies n Series
 #### Directors
 
   ```
+  GET /api/directed
+
   POST /api/directed/:personId/add/:movieId
 
   DELETE /api/directed/:personId/remove/:movieId
