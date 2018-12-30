@@ -21,12 +21,16 @@ class PeopleContentList extends Component {
       if(data.success) {
         const list = data.data.map((v) => {
           return {
-            heading: "test",
-            subHeading: "test",
+            heading: `${v.firstname} ${v.lastname}`,
+            subHeading: (Array.isArray(v.directed) && v.directed.length > 0 ? 'Director ' : '') 
+              + (Array.isArray(v.casted) && v.casted.length > 0 ? 'Actor ' : ''),
             firstColumn: {
-              Test: "test"
+              Born: `${v.birthday}${( v.birthplace ? ` in ${v.birthplace}`: '')}`,
+              Died: `${v.deathday}${( v.deathplace ? ` in ${v.deathplace}`: '')}`,
+              'Known for': `${v.directed.map(d => ` ${d.title}`)} 
+                ${v.casted.map(d => ` ${d.title}`)}`
             },
-            secondColumn: "test",
+            secondColumn: v.pic ? v.pic : 'No image',
             credits: {
               Credits: v.source, // Link?
             },
