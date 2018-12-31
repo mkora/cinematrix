@@ -7,7 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import Link from './Link';
 
 const styles = theme => ({
   root: {
@@ -52,7 +53,7 @@ class AppMenuList extends Component {
         <List>
           {data.map((link, key) =>
             link.children === undefined ? (
-                <NavLink
+                <Link
                   key={link.to}
                   to={`/${link.to}`}
                   activeClassName={classes.active}
@@ -65,7 +66,7 @@ class AppMenuList extends Component {
                       classes={{primary:classes.listItemTitle}}
                     />
                   </ListItem>
-                </NavLink>
+                </Link>
               ) : (
               <div key={`${link.to}${key}`}>
                 <ListItem button onClick={this.handleClick(tabIndex)}>
@@ -78,7 +79,7 @@ class AppMenuList extends Component {
                 <Collapse in={open[tabIndex++]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {link.children.map((sublink) =>
-                        <NavLink
+                        <Link
                           key={sublink.to}
                           to={`/${sublink.to}`}
                           activeClassName={classes.active}
@@ -87,7 +88,7 @@ class AppMenuList extends Component {
                           <ListItem button className={classes.nestedListItem}>
                             <ListItemText primary={sublink.title} />
                           </ListItem>
-                        </NavLink> 
+                        </Link> 
                     )}
                   </List>
                 </Collapse>

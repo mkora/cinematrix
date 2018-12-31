@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContentList from './ContentList';
 import { movies } from  '../api';
+import Link from './Link';
 
 class MovieContentList extends Component {
   state = {
@@ -26,7 +27,7 @@ class MovieContentList extends Component {
             },
             secondColumn: v.synopsis,
             credits: {
-              Credits: v.source, // Link?
+              Credits: <Link to={v.source}>imdb</Link> // Link?
             },
             editAction: `movie-edit/${v._id}`,
             deleteAction: `movie-edit/${v._id}`,
