@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import ContentParagraphList from './ContentParagraphList';
+import Link from './Link';
 
 const styles = theme => ({
   root: {
@@ -76,9 +77,12 @@ class ContentExtentionPanel extends Component {
               <Typography gutterBottom>
                 {data.secondColumn}
               </Typography>
-              {
-                data.credits &&
-                <ContentParagraphList data={data.credits} />
+              { data.credits &&
+                <div>
+                  <Typography className={classes.secondaryHeading}>
+                    Credits: <Link to={data.credits}>imdb</Link>
+                  </Typography>
+                </div>
               }
             </div>
           </ExpansionPanelDetails>
