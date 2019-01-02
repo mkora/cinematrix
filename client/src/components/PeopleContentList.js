@@ -31,9 +31,7 @@ class PeopleContentList extends Component {
                 ${v.casted.map(d => ` ${d.title}`)}`
             },
             secondColumn: v.pic ? v.pic : 'No image',
-            credits: {
-              Credits: v.source, // Link?
-            },
+            credits: v.source,
             editAction: `actor-edit/${v._id}`,
             deleteAction: `actor-delete/${v._id}`,
           };
