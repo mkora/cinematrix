@@ -22,15 +22,28 @@ class PeopleContentList extends Component {
         const list = data.data.map((v) => {
           return {
             heading: `${v.firstname} ${v.lastname}`,
-            subHeading: (Array.isArray(v.directed) && v.directed.length > 0 ? 'Director ' : '') 
-              + (Array.isArray(v.casted) && v.casted.length > 0 ? 'Actor ' : ''),
+            subHeading: (
+              Array.isArray(v.directed)
+                && v.directed.length > 0
+                ? 'Director ' : ''
+              ) + (
+              Array.isArray(v.casted)
+                && v.casted.length > 0
+                ? 'Actor ' : ''
+              ),
             firstColumn: {
-              Born: `${v.birthday}${( v.birthplace ? ` in ${v.birthplace}`: '')}`,
-              Died: `${v.deathday}${( v.deathplace ? ` in ${v.deathplace}`: '')}`,
-              'Known for': `${v.directed.map(d => ` ${d.title}`)} 
-                ${v.casted.map(d => ` ${d.title}`)}`
+              Born: 
+                v.birthday && `${v.birthday}${
+                  ( v.birthplace
+                      ? ` in ${v.birthplace}`: '')
+                }`,
+              Died: v.deathday && `${v.deathday}`,
+              'Known for':
+                `${v.directed.map(d => ` ${d.title}`)} 
+                 ${v.casted.map(d => ` ${d.title}`)}`
             },
-            secondColumn: v.pic ? v.pic : 'No image',
+            secondColumn: 
+              v.pic ? v.pic : 'No image',
             credits: v.source,
             editAction: `actor-edit/${v._id}`,
             deleteAction: `actor-delete/${v._id}`,

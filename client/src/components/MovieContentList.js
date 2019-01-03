@@ -15,14 +15,20 @@ class MovieContentList extends Component {
       const data = await movies();
       if(data.success) {
         const list = data.data.map((v) => {
-          const isMovie = v.episodes === 1 ? true : false;
+          const isMovie = v.episodes === 1;
           return {
             heading: v.title,
-            subHeading: `| ${v.country} | ${v.duration} min | (genre - TBD) | 
-              ${(isMovie ? `Movie` : `TV Series (${v.year})`)} | IMDB: ${v.imdb['$numberDecimal']}`,
+            subHeading: 
+              `| ${v.country}
+               | ${(v.duration) ? v.duration : '> 5'} min
+               | (genre - TBD)
+               | ${(isMovie ? `Movie` : `TV Series (${v.year})`)}
+               | IMDB: ${v.imdb['$numberDecimal']}`,
             firstColumn: {
-              Creators: `${v.directed.map(d => ` ${d.firstname} ${d.lastname}`)}`, // Links?
-              Stars: `${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,  // Links?
+              Creators:
+                `${v.directed.map(d => ` ${d.firstname} ${d.lastname}`)}`,
+              Stars: 
+                `${v.casted.map(d => ` ${d.firstname} ${d.lastname}`)}`,
             },
             secondColumn: v.synopsis,
             credits: v.source,

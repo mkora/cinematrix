@@ -18,13 +18,17 @@ const ContentParagraphList = (props) => {
 
   if (typeof data === 'object') {
     return (
-      <div>
-        {Object.keys(data).map((key, k) => (data[key] !== null) 
-          ? (<div key={k}>
-              <Typography className={classes.heading}>{key}:</Typography>
-              <Typography gutterBottom>{data[key]}</Typography>
-            </div>) 
-          : ''
+      <div>       
+        {Object.keys(data).map((key, k) => 
+          (data[key] !== null) &&
+            (<div key={k}>
+              <Typography className={classes.heading}>
+                {key}:
+              </Typography>
+              <Typography gutterBottom>
+                {data[key]}
+              </Typography>
+            </div>)
         )}
       </div>
     );    
@@ -33,7 +37,9 @@ const ContentParagraphList = (props) => {
   if (Array.isArray(data)) {
     return (
       <div>
-        {data.map((d, k) => <Typography key={k}>{d}</Typography> )}
+        {data.map((d, k) =>
+          <Typography key={k}>{d}</Typography>
+        )}
       </div>
     );
   }
