@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ContentList from './ContentList';
+import moment from 'moment';
 import * as api from  '../api';
 
 class PeopleContentList extends Component {
@@ -33,11 +34,11 @@ class PeopleContentList extends Component {
               ),
             firstColumn: {
               Born: 
-                v.birthday && `${v.birthday}${
+                v.birthday && `${moment(v.birthday).format('MMMM DD, YYYY')}${
                   ( v.birthplace
                       ? ` in ${v.birthplace}`: '')
                 }`,
-              Died: v.deathday && `${v.deathday}`,
+              Died: v.deathday && `${moment(v.deathday).format('MMMM DD, YYYY')}`,
               'Known for':
                 `${v.directed.map(d => ` ${d.title}`)} 
                  ${v.casted.map(d => ` ${d.title}`)}`
