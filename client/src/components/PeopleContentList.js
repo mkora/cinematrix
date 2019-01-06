@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ContentList from './ContentList';
-import ContentParagraphDate from './ContentParagraphDate';
+import ContentFormatDate from './ContentFormatDate';
 import * as api from  '../api';
 
 class PeopleContentList extends Component {
@@ -35,10 +35,10 @@ class PeopleContentList extends Component {
             firstColumn: {
               Born: 
                 v.birthday && 
-                  <ContentParagraphDate date={v.birthday}>
+                  <ContentFormatDate date={v.birthday}>
                     {v.birthplace && ` in ${v.birthplace}`}
-                  </ContentParagraphDate>,
-              Died: v.deathday && <ContentParagraphDate date={v.deathday} />,
+                  </ContentFormatDate>,
+              Died: v.deathday && <ContentFormatDate date={v.deathday} />,
               'Known for':
                 `${v.directed.map(d => ` ${d.title}`)} 
                  ${v.casted.map(d => ` ${d.title}`)}`

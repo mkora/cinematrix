@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const ContentParagraphDate = (props) => {
+const ContentFormatDate = (props) => {
   const {
     date,
     format,
@@ -17,9 +17,9 @@ const ContentParagraphDate = (props) => {
   );
 }
 
-ContentParagraphDate.propTypes = {
+ContentFormatDate.propTypes = {
   date: PropTypes.any.isRequired,
   format: PropTypes.string,
 };
 
-export default ContentParagraphDate;
+export default ContentFormatDate;

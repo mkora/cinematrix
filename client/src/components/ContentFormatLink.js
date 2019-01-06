@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink as ReactLink } from 'react-router-dom';
 
-class Link extends Component {
+class ContentFormatLink extends Component {
   
   parseTo(to)
   {
@@ -40,4 +40,4 @@ class Link extends Component {
   }
 }
 
-export default Link;
+export default ContentFormatLink;

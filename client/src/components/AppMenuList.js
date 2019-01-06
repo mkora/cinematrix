@@ -8,7 +8,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 // import { NavLink } from 'react-router-dom';
-import Link from './Link';
+import Link from './ContentFormatLink';
 
 const styles = theme => ({
   root: {

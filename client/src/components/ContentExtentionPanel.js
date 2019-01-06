@@ -9,8 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import ContentParagraphList from './ContentParagraphList';
-import Link from './Link';
+
+import ContentFormatUl from './ContentFormatUl';
+import ContentFormatLink from './ContentFormatLink';
 
 const styles = theme => ({
   root: {
@@ -71,7 +72,7 @@ class ContentExtentionPanel extends Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className={classes.column}>
-              <ContentParagraphList data={data.firstColumn} />
+              <ContentFormatUl data={data.firstColumn} />
             </div>
             <div className={classes.column}>
               <Typography gutterBottom>
@@ -80,7 +81,7 @@ class ContentExtentionPanel extends Component {
               { data.credits &&
                 <div>
                   <Typography className={classes.secondaryHeading}>
-                    Credits: <Link to={data.credits}>imdb</Link>
+                    Credits: <ContentFormatLink to={data.credits}>imdb</ContentFormatLink>
                   </Typography>
                 </div>
               }

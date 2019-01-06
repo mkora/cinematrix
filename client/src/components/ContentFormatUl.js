@@ -10,7 +10,7 @@ const styles = theme => ({
   },
 });
 
-const ContentParagraphList = (props) => {
+const ContentFormatUl = (props) => {
   const {
     data,
     classes,
@@ -47,8 +47,8 @@ const ContentParagraphList = (props) => {
   return <Typography>{data}</Typography>;
 }
 
-ContentParagraphList.propTypes = {
+ContentFormatUl.propTypes = {
   data: PropTypes.any.isRequired,
 };
 
-export default withStyles(styles)(ContentParagraphList);
+export default withStyles(styles)(ContentFormatUl);
