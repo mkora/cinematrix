@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ContentList from './ContentList';
 import ContentFormatDate from './ContentFormatDate';
+import ContentFormatImg from './ContentFormatImg';
 import * as api from  '../api';
 
 class PeopleContentList extends Component {
@@ -44,7 +45,7 @@ class PeopleContentList extends Component {
                  ${v.casted.map(d => ` ${d.title}`)}`
             },
             secondColumn: 
-              v.pic ? v.pic : 'No image',
+              <ContentFormatImg src={v.pic} alt={`${v.firstname} ${v.lastname}`} />,
             credits: v.source,
             editAction: `actor-edit/${v._id}`,
             deleteAction: `actor-delete/${v._id}`,
