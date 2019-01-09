@@ -32,8 +32,9 @@ class MovieContentList extends Component {
             },
             secondColumn: v.synopsis,
             credits: v.source,
-            editAction: `movie-edit/${v._id}`,
-            deleteAction: `movie-edit/${v._id}`,
+            id: v._id,
+            // editAction: `movie-edit/${v._id}`,
+            // deleteAction: `movie-edit/${v._id}`,
           };
         });
         this.setState({

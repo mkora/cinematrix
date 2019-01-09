@@ -10,8 +10,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
+import TextField from '@material-ui/core/TextField';
+
 import ContentFormatUl from './ContentFormatUl';
 import ContentFormatLink from './ContentFormatLink';
+import ContentDialog from './ContentDialog';
 
 const styles = theme => ({
   root: {
@@ -50,6 +53,7 @@ const styles = theme => ({
 class ContentExtentionPanel extends Component {
   state = {
     expended: false,
+    openDialog: false,
   };
 
   handleCancelClick = () => {
@@ -58,6 +62,19 @@ class ContentExtentionPanel extends Component {
     });
   }
 
+  handleEditClick = () => {
+    this.setState({ openDialog: true });
+  }
+
+  handleDialogClose = () => {
+    this.setState({ openDialog: false });
+  };
+
+  handleDialogSave = (id) => (e) => {
+    this.setState({ openDialog: false });
+    console.log(`Save ${id}`); // move? and form fields?
+  };
+
   render() {
     const {
       classes,
@@ -65,14 +82,22 @@ class ContentExtentionPanel extends Component {
     } = this.props;
     return (
       <div className={classes.root}>
-        <ExpansionPanel expanded={this.state.expended} onChange={this.handleCancelClick}>
+        <ExpansionPanel
+          expanded={this.state.expended}
+          onChange={this.handleCancelClick}
+        >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>{data.heading}</Typography>
-            <Typography className={classes.secondaryHeading}>{data.subHeading}</Typography>
+            <Typography className={classes.heading}>
+              {data.heading}
+            </Typography>
+            <Typography className={classes.secondaryHeading}>
+              {data.subHeading}
+            </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className={classes.column}>
-              <ContentFormatUl data={data.firstColumn} />
+              <ContentFormatUl
+                data={data.firstColumn} />
             </div>
             <div className={classes.column}>
               <Typography gutterBottom>
@@ -89,15 +114,42 @@ class ContentExtentionPanel extends Component {
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
-            <Button size="small" onClick={this.handleCancelClick}>Cancel</Button>
-            <Button size="small" color="primary"> {/* add handler*/ }
+            <Button 
+              size="small"
+              onClick={this.handleCancelClick}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="small"
+              onClick={this.handleEditClick}
+              color="primary"
+            >
               Edit
             </Button>
-            <Button size="small" color="primary"> {/* add handler*/ }
+            <Button
+              size="small"
+              color="primary"
+            > 
               Delete
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
+        <ContentDialog
+          title="Edit something"
+          open={this.state.openDialog}
+          onClose={this.handleDialogClose}
+          onSave={this.handleDialogSave(data.id)}
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </ContentDialog>
       </div>
     );
   }
