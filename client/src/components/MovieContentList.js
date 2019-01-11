@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContentList from './ContentList';
 import { movies } from  '../api';
+import MovieContentForm from './MovieContentForm';
 
 class MovieContentList extends Component {
   state = {
@@ -80,7 +81,9 @@ class MovieContentList extends Component {
         isError={isError}
         isOpenSnack={isOpenSnack}
         onSnackClose={this.handleSnackCloseClick}
-      />
+      >
+        <MovieContentForm />
+      </ContentList>
     );
   }
 }

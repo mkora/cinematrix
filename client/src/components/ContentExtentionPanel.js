@@ -10,8 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
-import TextField from '@material-ui/core/TextField';
-
 import ContentFormatUl from './ContentFormatUl';
 import ContentFormatLink from './ContentFormatLink';
 import ContentDialog from './ContentDialog';
@@ -72,6 +70,7 @@ class ContentExtentionPanel extends Component {
 
   handleDialogSave = (id) => (e) => {
     this.setState({ openDialog: false });
+    // this.props.onDialogSave(id);
     console.log(`Save ${id}`); // move? and form fields?
   };
 
@@ -79,7 +78,12 @@ class ContentExtentionPanel extends Component {
     const {
       classes,
       data,
+      // dialogTitle,
+      // ? other props
+      children,
     } = this.props;
+    const dialogTitle = "Edit Dialog";
+
     return (
       <div className={classes.root}>
         <ExpansionPanel
@@ -136,19 +140,12 @@ class ContentExtentionPanel extends Component {
           </ExpansionPanelActions>
         </ExpansionPanel>
         <ContentDialog
-          title="Edit something"
+          title={dialogTitle}
           open={this.state.openDialog}
           onClose={this.handleDialogClose}
           onSave={this.handleDialogSave(data.id)}
         >
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          {children}
         </ContentDialog>
       </div>
     );
