@@ -62,6 +62,7 @@ class AppDrawer extends Component {
       classes,
       toolbarTitle,
       menuList,
+      children,
     } = this.props;
 
     return (
@@ -120,7 +121,7 @@ class AppDrawer extends Component {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {this.props.children}
+          {children}
         </main>
       </div>
     );

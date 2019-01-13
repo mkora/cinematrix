@@ -66,6 +66,10 @@ class MovieContentList extends Component {
     this.setState({ isOpenSnack: false });
   };
 
+  handleDialogSave = (e) => {
+    console.log('save from list');
+  }
+
   render() {
     const {
       data,
@@ -81,6 +85,8 @@ class MovieContentList extends Component {
         isError={isError}
         isOpenSnack={isOpenSnack}
         onSnackClose={this.handleSnackCloseClick}
+        dialogTitle="Edit movie"
+        onDialogSave={this.handleDialogSave}
       >
         <MovieContentForm />
       </ContentList>

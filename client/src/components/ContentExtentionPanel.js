@@ -70,7 +70,7 @@ class ContentExtentionPanel extends Component {
 
   handleDialogSave = (id) => (e) => {
     this.setState({ openDialog: false });
-    // this.props.onDialogSave(id);
+    this.props.onDialogSave(id);
     console.log(`Save ${id}`); // move? and form fields?
   };
 
@@ -78,11 +78,9 @@ class ContentExtentionPanel extends Component {
     const {
       classes,
       data,
-      // dialogTitle,
-      // ? other props
+      dialogTitle,
       children,
     } = this.props;
-    const dialogTitle = "Edit Dialog";
 
     return (
       <div className={classes.root}>
@@ -155,7 +153,9 @@ class ContentExtentionPanel extends Component {
 ContentExtentionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
   // TODO: add fields [heading, subHeading, credits, firstColumn, secondColumn, editAction, deleteAction,]
-  data: PropTypes.object.isRequired,  
+  data: PropTypes.object.isRequired,
+  dialogTitle: PropTypes.string.isRequired,
+  onDialogSave: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ContentExtentionPanel);

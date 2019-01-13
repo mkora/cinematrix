@@ -3,15 +3,13 @@ import { NavLink as ReactLink } from 'react-router-dom';
 
 class ContentFormatLink extends Component {
   
-  parseTo(to)
-  {
+  parseTo(to) {
     let parser = document.createElement('a');
     parser.href = to;
     return parser;
   }
 
-  isInternal(to)
-  {
+  isInternal(to) {
     if(to.indexOf("://")=== -1) {
       return true;
     }

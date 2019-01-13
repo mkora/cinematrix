@@ -25,6 +25,9 @@ class ContentList extends Component {
       isError,
       isOpenSnack,
       onSnackClose,
+      dialogTitle,
+      onDialogSave,
+      children,
     } = this.props;
 
     if (isLoading) {
@@ -56,7 +59,17 @@ class ContentList extends Component {
 
     return (
       <div className={classes.root}>
-        {data.map((d, k) => <ContentExtentionPanel key={k} data={d} /> )}
+        {data.map((d, k) => (
+            <ContentExtentionPanel 
+              key={k}
+              data={d}
+              dialogTitle={dialogTitle}
+              onDialogSave={onDialogSave}
+              >
+              {children}
+            </ContentExtentionPanel>
+          )
+        )}
       </div>
     );
   }
@@ -69,6 +82,8 @@ ContentList.propTypes = {
   isError: PropTypes.bool.isRequired,
   isOpenSnack: PropTypes.bool.isRequired,
   onSnackClose: PropTypes.func.isRequired,
+  dialogTitle: PropTypes.string.isRequired,
+  onDialogSave: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ContentList);
