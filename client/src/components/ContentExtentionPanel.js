@@ -12,7 +12,6 @@ import Divider from '@material-ui/core/Divider';
 
 import ContentFormatUl from './ContentFormatUl';
 import ContentFormatLink from './ContentFormatLink';
-import ContentDialog from './ContentDialog';
 
 const styles = theme => ({
   root: {
@@ -60,26 +59,12 @@ class ContentExtentionPanel extends Component {
     });
   }
 
-  handleEditClick = () => {
-    this.setState({ openDialog: true });
-  }
-
-  handleDialogClose = () => {
-    this.setState({ openDialog: false });
-  };
-
-  handleDialogSave = (id) => (e) => {
-    this.setState({ openDialog: false });
-    this.props.onDialogSave(id);
-    console.log(`Save ${id}`); // move? and form fields?
-  };
-
   render() {
     const {
       classes,
       data,
-      dialogTitle,
       children,
+      onEditClick,
     } = this.props;
 
     return (
@@ -124,7 +109,7 @@ class ContentExtentionPanel extends Component {
             </Button>
             <Button
               size="small"
-              onClick={this.handleEditClick}
+              onClick={onEditClick}
               color="primary"
             >
               Edit
@@ -137,14 +122,8 @@ class ContentExtentionPanel extends Component {
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
-        <ContentDialog
-          title={dialogTitle}
-          open={this.state.openDialog}
-          onClose={this.handleDialogClose}
-          onSave={this.handleDialogSave(data.id)}
-        >
-          {children}
-        </ContentDialog>
+
+        {children}
       </div>
     );
   }
@@ -154,8 +133,7 @@ ContentExtentionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
   // TODO: add fields [heading, subHeading, credits, firstColumn, secondColumn, editAction, deleteAction,]
   data: PropTypes.object.isRequired,
-  dialogTitle: PropTypes.string.isRequired,
-  onDialogSave: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ContentExtentionPanel);

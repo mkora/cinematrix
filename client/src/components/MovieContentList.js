@@ -9,6 +9,21 @@ class MovieContentList extends Component {
     isError: false,
     isLoading: false,
     isOpenSnack: false,
+    isOpenDialog: false,
+  };
+
+  handleEditClick = () => {
+    this.setState({ isOpenDialog: true });
+  }
+
+  handleDialogClose = () => {
+    this.setState({ isOpenDialog: false });
+  };
+
+  handleDialogSave = (id) => (e) => {
+    this.setState({ isOpenDialog: false });
+    // call save function
+    console.log(`Save ${id}`);
   };
 
   async componentDidMount() {
@@ -34,8 +49,6 @@ class MovieContentList extends Component {
             secondColumn: v.synopsis,
             credits: v.source,
             id: v._id,
-            // editAction: `movie-edit/${v._id}`,
-            // deleteAction: `movie-edit/${v._id}`,
           };
         });
         this.setState({
@@ -66,10 +79,6 @@ class MovieContentList extends Component {
     this.setState({ isOpenSnack: false });
   };
 
-  handleDialogSave = (e) => {
-    console.log('save from list');
-  }
-
   render() {
     const {
       data,
@@ -85,10 +94,13 @@ class MovieContentList extends Component {
         isError={isError}
         isOpenSnack={isOpenSnack}
         onSnackClose={this.handleSnackCloseClick}
-        dialogTitle="Edit movie"
-        onDialogSave={this.handleDialogSave}
+        onEditClick={this.handleEditClick}
       >
-        <MovieContentForm />
+        <MovieContentForm
+          open={this.state.isOpenDialog}
+          onSave={this.handleDialogSave}
+          onClose={this.handleDialogClose}
+        />
       </ContentList>
     );
   }
