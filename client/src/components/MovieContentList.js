@@ -10,20 +10,37 @@ class MovieContentList extends Component {
     isLoading: false,
     isOpenSnack: false,
     isOpenDialog: false,
+    checkedId: null,
   };
 
-  handleEditClick = () => {
-    this.setState({ isOpenDialog: true });
+  handleSnackCloseClick = () => {
+    this.setState({
+      isOpenSnack: false,
+    });
+  };
+
+  handleEditClick = (id) => (e) => {
+    this.setState({
+      isOpenDialog: true,
+      checkedId: id,
+    });
   }
 
   handleDialogClose = () => {
-    this.setState({ isOpenDialog: false });
+    this.setState({
+      isOpenDialog: false,
+      checkedId: null,
+    });
   };
 
-  handleDialogSave = (id) => (e) => {
-    this.setState({ isOpenDialog: false });
-    // call save function
-    console.log(`Save ${id}`);
+  handleDialogSave = (e) => {
+    const id = this.state.checkedId;
+    this.setState({
+      isOpenDialog: false,
+      checkedId: null,
+    });
+    console.log(e);
+    console.log(`Save movie ${id}`);
   };
 
   async componentDidMount() {
@@ -74,10 +91,6 @@ class MovieContentList extends Component {
       console.log(err);
     }
   }
-
-  handleSnackCloseClick = () => {  
-    this.setState({ isOpenSnack: false });
-  };
 
   render() {
     const {

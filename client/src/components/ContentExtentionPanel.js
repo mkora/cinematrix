@@ -109,7 +109,7 @@ class ContentExtentionPanel extends Component {
             </Button>
             <Button
               size="small"
-              onClick={onEditClick}
+              onClick={onEditClick(data.id)}
               color="primary"
             >
               Edit
