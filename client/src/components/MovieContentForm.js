@@ -57,7 +57,14 @@ class MovieContentForm extends Component {
 
   state = {
     title: '',
-    // etc
+    alsoknown: '',
+    country: '',
+    year: new Date().getFullYear(),
+    imdb: 7.0,
+    episodes: 1,
+    duration: 35,
+    synopsis: '',
+    source: '',
   }
 
   handleChange = name => event => {
@@ -94,14 +101,19 @@ class MovieContentForm extends Component {
               className={classes.textField}
               margin="normal"
               onChange={this.handleChange('title')}
+              value={this.state.title}              
             />
             <TextField
               required
-              id="country-title"
-              label="Country"
+              id="movie-alsoknown"
+              label="Also known"
+              placeholder="Also known"
+              multiline
               className={classes.textField}
               margin="normal"
-            />
+              onChange={this.handleChange('alsoknown')}
+              value={this.state.alsoknown}              
+            />            
             <TextField
               id="movie-county"
               select
@@ -112,8 +124,9 @@ class MovieContentForm extends Component {
                   className: classes.menu,
                 },
               }}
-              helperText="Country"
               margin="normal"
+              onChange={this.handleChange('country')}
+              value={this.state.country}  
             >
               {countries.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -131,8 +144,10 @@ class MovieContentForm extends Component {
               }}
               helperText="Year"
               margin="normal"
+              onChange={this.handleChange('year')}
+              value={this.state.year}                
               // start from ?
-              // end ?
+              // end ?              
             />
             <TextField
               id="movie-imdb"
@@ -143,6 +158,8 @@ class MovieContentForm extends Component {
                 shrink: true,
               }}
               margin="normal"
+              onChange={this.handleChange('imdb')}
+              value={this.state.imdb}                
             />
             <TextField
               id="movie-duration"
@@ -153,7 +170,21 @@ class MovieContentForm extends Component {
                 shrink: true,
               }}
               margin="normal"
+              onChange={this.handleChange('duration')}
+              value={this.state.duration}  
             />
+            <TextField
+              id="movie-episodes"
+              label="Episodes"
+              type="number"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              margin="normal"
+              onChange={this.handleChange('episodes')}
+              value={this.state.episodes}  
+            />            
             <TextField
               id="movie-synopsis"
               label="Synopsis"
@@ -165,6 +196,8 @@ class MovieContentForm extends Component {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={this.handleChange('synopsis')}
+              value={this.state.synopsis}                
             />
             <TextField
               required
@@ -174,6 +207,8 @@ class MovieContentForm extends Component {
               multiline
               className={classes.textField}
               margin="normal"
+              onChange={this.handleChange('source')}
+              value={this.state.source}                
             />
           </form>
         </DialogContent>
