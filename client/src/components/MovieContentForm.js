@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { movies } from  '../api';
+import range from '../utils/range';
 
 const styles = theme => ({
   container: {
@@ -53,13 +54,16 @@ const countries = [
   },
 ];
 
+const currentYear = new Date().getFullYear();
+const startYear = 1930;
+
 class MovieContentForm extends Component {
 
   state = {
     title: '',
     alsoknown: '',
     country: '',
-    year: new Date().getFullYear(),
+    year: currentYear,
     imdb: 7.0,
     episodes: 1,
     duration: 35,
@@ -119,14 +123,14 @@ class MovieContentForm extends Component {
               select
               label="Country"
               className={classes.textField}
-              SelectProps={{
-                MenuProps: {
+              InputProps={{
+                menuprops: {
                   className: classes.menu,
                 },
               }}
               margin="normal"
               onChange={this.handleChange('country')}
-              value={this.state.country}  
+              value={this.state.country}
             >
               {countries.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -145,10 +149,14 @@ class MovieContentForm extends Component {
               helperText="Year"
               margin="normal"
               onChange={this.handleChange('year')}
-              value={this.state.year}                
-              // start from ?
-              // end ?              
-            />
+              value={this.state.year}
+            >
+              {range(startYear, currentYear).map(option => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
             <TextField
               id="movie-imdb"
               label="IMDB"
