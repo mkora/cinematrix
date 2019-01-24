@@ -80,15 +80,15 @@ class MovieContentForm extends Component {
   render() {
     const {
       classes,
-      open,
-      onSave,
-      onClose,
+      isDialogOpen,
+      onDialogSave,
+      onDialogClose,
     } = this.props;
 
     return (
       <Dialog
-        open={open}
-        onClose={onClose}
+        open={isDialogOpen}
+        onClose={onDialogClose}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
@@ -222,13 +222,13 @@ class MovieContentForm extends Component {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={onClose}
+            onClick={onDialogClose}
             color="primary"
           >
             Cancel
           </Button>
           <Button
-            onClick={onSave}
+            onClick={onDialogSave}
             color="primary"
           >
             Save
@@ -241,9 +241,9 @@ class MovieContentForm extends Component {
 
 MovieContentForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
+  isDialogOpen: PropTypes.bool.isRequired,
+  onDialogClose: PropTypes.func.isRequired,
+  onDialogSave: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(MovieContentForm);

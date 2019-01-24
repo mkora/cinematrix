@@ -11,6 +11,7 @@ import withRoot from '../withRoot';
 import AppDrawer from './AppDrawer';
 import MovieContentList from './MovieContentList';
 import PeopleContentList from './PeopleContentList'
+import MovieContentForm from './MovieContentForm';
 
 const styles = theme => ({
   root: {
@@ -77,14 +78,24 @@ const routes = [
     key: 'movies',
     path: '/movies',
     component: () => (
-      <MovieContentList />
+      <MovieContentList 
+        isDialogOpen={this.state.isDialogOpen}
+        onDialogSave={this.handleDialogSave}
+        onDialogClose={this.handleDialogClose}      
+      />
     ),
   },
   {
     key: 'add-movie',
     path: '/add-movie',
     component: () => (
-      <div>TODO: Add add movie component</div>
+      <div>
+        <MovieContentForm
+          isDialogOpen={this.state.isDialogOpen}
+          onDialogSave={this.handleDialogSave}
+          onDialogClose={this.handleDialogClose}
+        />
+      </div>
     ),
   },
   {
@@ -118,6 +129,36 @@ const routes = [
 ];
 
 class App extends Component {
+
+  state = {
+    isDialogOpen: false,
+    checkedId: null,    
+  };
+
+  handleEditClick = (id) => (e) => {
+    this.setState({
+      isDialogOpen: true,
+      checkedId: id,
+    });
+  }
+
+  handleDialogClose = () => {
+    this.setState({
+      iisDialogOpen: false,
+      checkedId: null,
+    });
+  };
+
+  handleDialogSave = (e) => {
+    const id = this.state.checkedId;
+    this.setState({
+      isDialogOpen: false,
+      checkedId: null,
+    });
+    console.log(e);
+    console.log(`Save movie ${id}`);
+  };
+
   render() {
     return (
       <Router>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ContentList from './ContentList';
 import { movies } from  '../api';
 import MovieContentForm from './MovieContentForm';
@@ -9,38 +10,12 @@ class MovieContentList extends Component {
     isError: false,
     isLoading: false,
     isOpenSnack: false,
-    isOpenDialog: false,
-    checkedId: null,
   };
 
   handleSnackCloseClick = () => {
     this.setState({
       isOpenSnack: false,
     });
-  };
-
-  handleEditClick = (id) => (e) => {
-    this.setState({
-      isOpenDialog: true,
-      checkedId: id,
-    });
-  }
-
-  handleDialogClose = () => {
-    this.setState({
-      isOpenDialog: false,
-      checkedId: null,
-    });
-  };
-
-  handleDialogSave = (e) => {
-    const id = this.state.checkedId;
-    this.setState({
-      isOpenDialog: false,
-      checkedId: null,
-    });
-    console.log(e);
-    console.log(`Save movie ${id}`);
   };
 
   async componentDidMount() {
@@ -100,6 +75,12 @@ class MovieContentList extends Component {
       isOpenSnack,
     } = this.state;
 
+    const {
+      isDialogOpen,
+      onDialogSave,
+      onDialogClose,
+    } = this.props;
+
     return (
       <ContentList
         data={data}
@@ -110,13 +91,20 @@ class MovieContentList extends Component {
         onEditClick={this.handleEditClick}
       >
         <MovieContentForm
-          open={this.state.isOpenDialog}
-          onSave={this.handleDialogSave}
-          onClose={this.handleDialogClose}
+          open={isDialogOpen}
+          onSave={onDialogSave}
+          onClose={onDialogClose}
         />
       </ContentList>
     );
   }
 }
+
+MovieContentList.propTypes = {
+  classes: PropTypes.object.isRequired,
+  isDialogOpen: PropTypes.bool.isRequired,
+  onDialogSave: PropTypes.func.isRequired,
+  onDialogClose: PropTypes.func.isRequired,
+};
 
 export default MovieContentList;
