@@ -65,69 +65,6 @@ const menu = [
   },
 ];
 
-const routes = [
-  {
-    key: 'home',
-    path: '/',
-    exact: true,
-    component: () => (
-      <div>TODO: Home component</div>
-    ),
-  },
-  {
-    key: 'movies',
-    path: '/movies',
-    component: () => (
-      <MovieContentList 
-        isDialogOpen={this.state.isDialogOpen}
-        onDialogSave={this.handleDialogSave}
-        onDialogClose={this.handleDialogClose}      
-      />
-    ),
-  },
-  {
-    key: 'add-movie',
-    path: '/add-movie',
-    component: () => (
-      <div>
-        <MovieContentForm
-          isDialogOpen={this.state.isDialogOpen}
-          onDialogSave={this.handleDialogSave}
-          onDialogClose={this.handleDialogClose}
-        />
-      </div>
-    ),
-  },
-  {
-    key: 'actors',
-    path: '/actors',
-    component: () => (
-      <PeopleContentList type="actor" />
-    ),
-  },
-  {
-    key: 'add-actor',
-    path: '/add-actor',
-    component: () => (
-      <div>TODO: Add add actor component</div>
-    ),
-  },
-  {
-    key: 'directors',
-    path: '/directors',
-    component: () => (
-      <PeopleContentList type="director" />
-    ),
-  },
-  {
-    key: 'add-director',
-    path: '/add-directors',
-    component: () => (
-      <div>TODO: Add add directors component</div>
-    ),
-  },
-];
-
 class App extends Component {
 
   state = {
@@ -165,9 +102,38 @@ class App extends Component {
         <div className={this.props.classes.root}>
           <AppDrawer toolbarTitle="Movies and TV Series" menuList={menu}>
             <Switch>
-              {routes.map((route) =>
-                <Route {...route} />
-              )}
+                <Route key="home" path="/" exact component={<div>TODO: Home component</div>} />
+                <Route key='movies' path='/movies' render={
+                  (props) => (
+                    <div>
+                      <MovieContentList 
+                        isDialogOpen={true}
+                        onDialogSave={props.handleDialogSave}
+                        onDialogClose={props.handleDialogClose}      
+                      />
+                    </div>
+                  )} />
+                <Route key='add-movie' path='/add-movie' render={(props) => (
+                    <div>
+                      <MovieContentForm
+                        isDialogOpen={true}
+                        onDialogSave={props.handleDialogSave}
+                        onDialogClose={props.handleDialogClose}
+                      />
+                    </div>
+                  )} />
+                <Route key='actors' path='/actors' component={() => (
+                    <PeopleContentList type="actor" />
+                  )} />
+                <Route key='add-actor' path='/add-actor' component={() => (
+                    <div>TODO: Add add actor component</div>
+                  )} />
+                <Route key='directors' path='/directors' component={() => (
+                    <PeopleContentList type="director" />
+                  )} />
+                <Route key='add-director' path='/add-directors' component={() => (
+                    <div>TODO: Add add directors component</div>
+                  )} />
             </Switch>
           </AppDrawer>
         </div>
