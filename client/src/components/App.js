@@ -102,36 +102,37 @@ class App extends Component {
         <div className={this.props.classes.root}>
           <AppDrawer toolbarTitle="Movies and TV Series" menuList={menu}>
             <Switch>
-                <Route key="home" path="/" exact component={<div>TODO: Home component</div>} />
+                <Route path="/" exact render={() => <div>TODO: Home component</div>} />
                 <Route key='movies' path='/movies' render={
                   (props) => (
                     <div>
                       <MovieContentList 
-                        isDialogOpen={true}
-                        onDialogSave={props.handleDialogSave}
-                        onDialogClose={props.handleDialogClose}      
+                        isDialogOpen={this.state.isDialogOpen}
+                        onDialogSave={this.handleDialogSave.bind(this)}
+                        onDialogClose={this.handleDialogClose.bind(this)}
                       />
                     </div>
                   )} />
-                <Route key='add-movie' path='/add-movie' render={(props) => (
+                <Route key='add-movie' path='/add-movie' render={
+                  (props) => (
                     <div>
                       <MovieContentForm
-                        isDialogOpen={true}
-                        onDialogSave={props.handleDialogSave}
-                        onDialogClose={props.handleDialogClose}
+                        isDialogOpen={this.state.isDialogOpen}
+                        onDialogSave={this.handleDialogSave.bind(this)}
+                        onDialogClose={this.handleDialogClose.bind(this)}
                       />
                     </div>
                   )} />
-                <Route key='actors' path='/actors' component={() => (
+                <Route path='/actors' render={() => (
                     <PeopleContentList type="actor" />
                   )} />
-                <Route key='add-actor' path='/add-actor' component={() => (
+                <Route path='/add-actor' render={() => (
                     <div>TODO: Add add actor component</div>
                   )} />
-                <Route key='directors' path='/directors' component={() => (
+                <Route path='/directors' render={() => (
                     <PeopleContentList type="director" />
                   )} />
-                <Route key='add-director' path='/add-directors' component={() => (
+                <Route path='/add-directors' render={() => (
                     <div>TODO: Add add directors component</div>
                   )} />
             </Switch>
