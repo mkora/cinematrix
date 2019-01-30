@@ -72,10 +72,9 @@ class App extends Component {
     checkedId: null,    
   };
 
-  handleEditClick = (id) => (e) => {
+  handleEditClick = (e) => {
     this.setState({
       isDialogOpen: true,
-      checkedId: id,
     });
   }
 
@@ -103,8 +102,8 @@ class App extends Component {
           <AppDrawer toolbarTitle="Movies and TV Series" menuList={menu}>
             <Switch>
                 <Route path="/" exact render={() => <div>TODO: Home component</div>} />
-                <Route key='movies' path='/movies' render={
-                  (props) => (
+                <Route path='/movies' render={
+                  () => (
                     <div>
                       <MovieContentList 
                         isDialogOpen={this.state.isDialogOpen}
@@ -113,8 +112,8 @@ class App extends Component {
                       />
                     </div>
                   )} />
-                <Route key='add-movie' path='/add-movie' render={
-                  (props) => (
+                <Route path='/add-movie' render={
+                  () => (
                     <div>
                       <MovieContentForm
                         isDialogOpen={this.state.isDialogOpen}
