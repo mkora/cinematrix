@@ -72,10 +72,11 @@ class App extends Component {
     checkedId: null,    
   };
 
-  handleEditClick = (e) => {
+  handleEditClick = (id) => (e) => {
     this.setState({
       isDialogOpen: true,
     });
+    console.log('Click edit: ' + id);
   }
 
   handleDialogClose = () => {
@@ -109,14 +110,17 @@ class App extends Component {
                         isDialogOpen={this.state.isDialogOpen}
                         onDialogSave={this.handleDialogSave.bind(this)}
                         onDialogClose={this.handleDialogClose.bind(this)}
+                        onDialogEditClick={this.handleEditClick.bind(this)}
                       />
                     </div>
                   )} />
                 <Route path='/add-movie' render={
                   () => (
                     <div>
+{console.log(this.state)}
                       <MovieContentForm
-                        isDialogOpen={this.state.isDialogOpen}
+                        fullScreenDialog={true}
+                        isDialogOpen={true}
                         onDialogSave={this.handleDialogSave.bind(this)}
                         onDialogClose={this.handleDialogClose.bind(this)}
                       />

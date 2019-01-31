@@ -59,12 +59,15 @@ class ContentExtentionPanel extends Component {
     });
   }
 
+  handleEditClick = (id) => (e) => {
+    e.preventDefault();
+    this.props.onEditClick(id);
+  }
+
   render() {
     const {
       classes,
       data,
-      children,
-      onEditClick,
     } = this.props;
 
     return (
@@ -109,7 +112,7 @@ class ContentExtentionPanel extends Component {
             </Button>
             <Button
               size="small"
-              onClick={onEditClick}
+              onClick={this.handleEditClick(data.id)}
               color="primary"
             >
               Edit
@@ -122,8 +125,6 @@ class ContentExtentionPanel extends Component {
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
-
-        {children}
       </div>
     );
   }

@@ -67,6 +67,7 @@ class MovieContentList extends Component {
     }
   }
 
+
   render() {
     const {
       data,
@@ -79,6 +80,7 @@ class MovieContentList extends Component {
       isDialogOpen,
       onDialogSave,
       onDialogClose,
+      onDialogEditClick
     } = this.props;
 
     return (
@@ -88,8 +90,9 @@ class MovieContentList extends Component {
         isError={isError}
         isOpenSnack={isOpenSnack}
         onSnackClose={this.handleSnackCloseClick}
-        onEditClick={this.handleEditClick}
+        onEditClick={onDialogEditClick}
       >
+
         <MovieContentForm
           open={isDialogOpen}
           onSave={onDialogSave}
@@ -101,10 +104,10 @@ class MovieContentList extends Component {
 }
 
 MovieContentList.propTypes = {
-  classes: PropTypes.object.isRequired,
   isDialogOpen: PropTypes.bool.isRequired,
   onDialogSave: PropTypes.func.isRequired,
   onDialogClose: PropTypes.func.isRequired,
+  onDialogEditClick: PropTypes.func.isRequired,
 };
 
 export default MovieContentList;

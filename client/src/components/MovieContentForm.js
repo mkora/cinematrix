@@ -79,6 +79,7 @@ class MovieContentForm extends Component {
 
   render() {
     const {
+      fullScreenDialog,
       classes,
       isDialogOpen,
       onDialogSave,
@@ -87,6 +88,7 @@ class MovieContentForm extends Component {
 
     return (
       <Dialog
+        fullScreen={fullScreenDialog}
         open={isDialogOpen}
         onClose={onDialogClose}
         aria-labelledby="form-dialog-title"
@@ -240,10 +242,15 @@ class MovieContentForm extends Component {
 }
 
 MovieContentForm.propTypes = {
+  fullScreenDialog: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   isDialogOpen: PropTypes.bool.isRequired,
   onDialogClose: PropTypes.func.isRequired,
   onDialogSave: PropTypes.func.isRequired,
+};
+
+MovieContentForm.defaultProps = {
+  fullScreenDialog: false
 };
 
 export default withStyles(styles)(MovieContentForm);
