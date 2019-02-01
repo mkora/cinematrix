@@ -8,6 +8,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
 
 import { movies } from  '../api';
 import range from '../utils/range';
@@ -24,6 +29,12 @@ const styles = theme => ({
   },
   menu: {
     width: 200,
+  },
+  appBar: {
+    position: 'relative',
+  },
+  flex: {
+    flex: 1,
   },
 });
 
@@ -86,6 +97,27 @@ class MovieContentForm extends Component {
       onDialogClose,
     } = this.props;
 
+    let dialogTop = (fullScreenDialog) ?
+      (
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton color="inherit" onClick={onDialogClose} aria-label="Close">
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" className={classes.flex}>
+              Add movie
+            </Typography>
+            <Button color="inherit" onClick={onDialogSave}>
+              Save
+            </Button>
+          </Toolbar>
+        </AppBar>
+      ) : (
+        <DialogTitle id="form-dialog-title">
+          Edit movie
+        </DialogTitle>
+      );
+
     return (
       <Dialog
         fullScreen={fullScreenDialog}
@@ -93,9 +125,7 @@ class MovieContentForm extends Component {
         onClose={onDialogClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">
-          Edit Movie
-        </DialogTitle>
+        { dialogTop }
         <DialogContent>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField

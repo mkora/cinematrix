@@ -80,8 +80,9 @@ class App extends Component {
   }
 
   handleDialogClose = () => {
+    console.log(`Close dialog`);
     this.setState({
-      iisDialogOpen: false,
+      isDialogOpen: false,
       checkedId: null,
     });
   };
