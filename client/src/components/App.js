@@ -19,52 +19,6 @@ const styles = theme => ({
   },
 });
 
-const menu = [
-  {
-    to: '',
-    title: 'Home',
-  },
-  {
-    title: 'Movies',
-    children: [
-      {
-        to: 'movies',
-        title: 'All movies',
-      },
-      {
-        to: 'add-movie',
-        title: 'Add movie',
-      },
-    ]
-  },
-  {
-    title: 'Actors',
-    children: [
-      {
-        to: 'actors',
-        title: 'All actors',
-      },
-      {
-        to: 'add-movie',
-        title: 'Add actor',
-      },
-    ]
-  },
-  {
-    title: 'Directors',
-    children: [
-      {
-        to: 'directors',
-        title: 'All directors',
-      },
-      {
-        to: 'add-director',
-        title: 'Add director',
-      },
-    ]
-  },
-];
-
 class App extends Component {
 
   state = {
@@ -72,14 +26,14 @@ class App extends Component {
     checkedId: null,    
   };
 
-  handleEditClick = (id) => (e) => {
+  handleEditClick = (e) => {
     this.setState({
       isDialogOpen: true,
     });
-    console.log('Click edit: ' + id);
+    console.log('Click edit');
   }
 
-  handleDialogClose = () => {
+  handleDialogClose = (e) => {
     console.log(`Close dialog`);
     this.setState({
       isDialogOpen: false,
@@ -101,7 +55,58 @@ class App extends Component {
     return (
       <Router>
         <div className={this.props.classes.root}>
-          <AppDrawer toolbarTitle="Movies and TV Series" menuList={menu}>
+          <AppDrawer
+            toolbarTitle="Movies and TV Series"
+            menuList={[
+              {
+                to: '',
+                title: 'Home',
+              },
+              {
+                title: 'Movies',
+                children: [
+                  {
+                    to: 'movies',
+                    title: 'All movies',
+                  },
+                  {
+                    to: 'add-movie',
+                    title: 'Add movie',
+                    onClick: () => {
+                      this.setState({
+                        isDialogOpen: true,
+                      });
+                    }
+                  },
+                ]
+              },
+              {
+                title: 'Actors',
+                children: [
+                  {
+                    to: 'actors',
+                    title: 'All actors',
+                  },
+                  {
+                    to: 'add-movie',
+                    title: 'Add actor',
+                  },
+                ]
+              },
+              {
+                title: 'Directors',
+                children: [
+                  {
+                    to: 'directors',
+                    title: 'All directors',
+                  },
+                  {
+                    to: 'add-director',
+                    title: 'Add director',
+                  },
+                ]
+              },
+            ]}>
             <Switch>
                 <Route path="/" exact render={() => <div>TODO: Home component</div>} />
                 <Route path='/movies' render={
@@ -118,13 +123,13 @@ class App extends Component {
                 <Route path='/add-movie' render={
                   () => (
                     <div>
-{console.log(this.state)}
                       <MovieContentForm
                         fullScreenDialog={true}
-                        isDialogOpen={true}
+                        isDialogOpen={this.state.isDialogOpen}
                         onDialogSave={this.handleDialogSave.bind(this)}
                         onDialogClose={this.handleDialogClose.bind(this)}
                       />
+                      { /* change state here */}
                     </div>
                   )} />
                 <Route path='/actors' render={() => (

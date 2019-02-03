@@ -117,6 +117,26 @@ class MovieContentForm extends Component {
           Edit movie
         </DialogTitle>
       );
+    let dialogBottom = (fullScreenDialog) ?
+      (
+        <div></div>
+      ) :
+      (
+        <DialogActions>
+          <Button
+            onClick={onDialogClose}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={onDialogSave}
+            color="primary"
+          >
+            Save
+          </Button>
+        </DialogActions>
+      );
 
     return (
       <Dialog
@@ -252,20 +272,7 @@ class MovieContentForm extends Component {
             />
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={onDialogClose}
-            color="primary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={onDialogSave}
-            color="primary"
-          >
-            Save
-          </Button>
-        </DialogActions>
+        { dialogBottom }
       </Dialog>
     );
   }

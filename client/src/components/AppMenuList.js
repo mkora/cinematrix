@@ -59,6 +59,7 @@ class AppMenuList extends Component {
                   activeClassName={classes.active}
                   className={classes.navLink}
                   exact
+                  onClick={link.onClick}
                   >
                   <ListItem button>
                     <ListItemText
@@ -84,6 +85,7 @@ class AppMenuList extends Component {
                           to={`/${sublink.to}`}
                           activeClassName={classes.active}
                           className={classes.navLink}
+                          onClick={sublink.onClick}
                           exact>
                           <ListItem button className={classes.nestedListItem}>
                             <ListItemText primary={sublink.title} />
