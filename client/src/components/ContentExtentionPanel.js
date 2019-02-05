@@ -50,7 +50,6 @@ const styles = theme => ({
 class ContentExtentionPanel extends Component {
   state = {
     expended: false,
-    openDialog: false,
   };
 
   handleCancelClick = () => {
@@ -59,15 +58,11 @@ class ContentExtentionPanel extends Component {
     });
   }
 
-  handleEditClick = (id) => (e) => {
-    e.preventDefault();
-    this.props.onEditClick(id);
-  }
-
   render() {
     const {
       classes,
       data,
+      onEditClick,
     } = this.props;
 
     return (
@@ -112,7 +107,7 @@ class ContentExtentionPanel extends Component {
             </Button>
             <Button
               size="small"
-              onClick={this.handleEditClick(data.id)}
+              onClick={onEditClick(data.id)}
               color="primary"
             >
               Edit

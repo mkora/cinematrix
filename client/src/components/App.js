@@ -26,11 +26,10 @@ class App extends Component {
     checkedId: null,    
   };
 
-  handleEditClick = (e) => {
+  handleEditClick = (id) => (e) => {
     this.setState({
       isDialogOpen: true,
     });
-    console.log('Click edit');
   }
 
   handleDialogClose = (e) => {
@@ -129,7 +128,6 @@ class App extends Component {
                         onDialogSave={this.handleDialogSave.bind(this)}
                         onDialogClose={this.handleDialogClose.bind(this)}
                       />
-                      { /* change state here */}
                     </div>
                   )} />
                 <Route path='/actors' render={() => (
