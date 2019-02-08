@@ -26,6 +26,7 @@ class ContentList extends Component {
       isOpenSnack,
       onSnackClose,
       onEditClick,
+      children
     } = this.props;
 
     if (isLoading) {
@@ -63,6 +64,7 @@ class ContentList extends Component {
               data={d}
               onEditClick={onEditClick}
               >
+              {children}
             </ContentExtentionPanel>
           )
         )}

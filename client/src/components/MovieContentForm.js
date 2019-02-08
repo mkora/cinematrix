@@ -96,7 +96,6 @@ class MovieContentForm extends Component {
       onDialogSave,
       onDialogClose,
     } = this.props;
-
     let dialogTop = (fullScreenDialog) ?
       (
         <AppBar className={classes.appBar}>

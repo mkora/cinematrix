@@ -63,6 +63,7 @@ class ContentExtentionPanel extends Component {
       classes,
       data,
       onEditClick,
+      children
     } = this.props;
 
     return (
@@ -120,6 +121,7 @@ class ContentExtentionPanel extends Component {
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
+        {children}
       </div>
     );
   }

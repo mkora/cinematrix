@@ -92,7 +92,6 @@ class MovieContentList extends Component {
         onSnackClose={this.handleSnackCloseClick}
         onEditClick={onDialogEditClick}
       >
-
         <MovieContentForm
           open={isDialogOpen}
           onSave={onDialogSave}
