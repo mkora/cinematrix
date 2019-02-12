@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ContentExtentionPanel from './ContentExtentionPanel';
@@ -26,7 +26,8 @@ class ContentList extends Component {
       isOpenSnack,
       onSnackClose,
       onEditClick,
-      children
+      dialogProps,
+      children,
     } = this.props;
 
     if (isLoading) {
@@ -63,8 +64,19 @@ class ContentList extends Component {
               key={k}
               data={d}
               onEditClick={onEditClick}
+              dialogProps={{
+                open: dialogProps.isDialogOpen,
+                onSave: dialogProps.onDialogSave,
+                onClose: dialogProps.onDialogClose
+              }}              
               >
-              {children}
+              {Children.map(children, child => {
+                return React.cloneElement(child, {
+                  open: dialogProps.isDialogOpen,
+                  onSave: dialogProps.onDialogSave,
+                  onClose: dialogProps.onDialogClose
+                })
+              })}
             </ContentExtentionPanel>
           )
         )}
@@ -81,6 +93,7 @@ ContentList.propTypes = {
   isOpenSnack: PropTypes.bool.isRequired,
   onSnackClose: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  dialogProps: PropTypes.object,
 };
 
 export default withStyles(styles)(ContentList);

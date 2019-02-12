@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -63,6 +63,7 @@ class ContentExtentionPanel extends Component {
       classes,
       data,
       onEditClick,
+      dialogProps,
       children
     } = this.props;
 
@@ -121,7 +122,13 @@ class ContentExtentionPanel extends Component {
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
-        {children}
+          {Children.map(children, child => {
+            return React.cloneElement(child, {
+              open: dialogProps.isDialogOpen,
+              onSave: dialogProps.onDialogSave,
+              onClose: dialogProps.onDialogClose
+            })
+          })}
       </div>
     );
   }
@@ -132,6 +139,7 @@ ContentExtentionPanel.propTypes = {
   // TODO: add fields [heading, subHeading, credits, firstColumn, secondColumn, editAction, deleteAction,]
   data: PropTypes.object.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  dialogProps: PropTypes.object,
 };
 
 export default withStyles(styles)(ContentExtentionPanel);
