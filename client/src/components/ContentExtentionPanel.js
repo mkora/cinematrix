@@ -122,13 +122,7 @@ class ContentExtentionPanel extends Component {
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanel>
-          {Children.map(children, child => {
-            return React.cloneElement(child, {
-              open: dialogProps.isDialogOpen,
-              onSave: dialogProps.onDialogSave,
-              onClose: dialogProps.onDialogClose
-            })
-          })}
+          {children}
       </div>
     );
   }
@@ -139,7 +133,6 @@ ContentExtentionPanel.propTypes = {
   // TODO: add fields [heading, subHeading, credits, firstColumn, secondColumn, editAction, deleteAction,]
   data: PropTypes.object.isRequired,
   onEditClick: PropTypes.func.isRequired,
-  dialogProps: PropTypes.object,
 };
 
 export default withStyles(styles)(ContentExtentionPanel);

@@ -64,17 +64,12 @@ class ContentList extends Component {
               key={k}
               data={d}
               onEditClick={onEditClick}
-              dialogProps={{
-                open: dialogProps.isDialogOpen,
-                onSave: dialogProps.onDialogSave,
-                onClose: dialogProps.onDialogClose
-              }}              
               >
               {Children.map(children, child => {
                 return React.cloneElement(child, {
-                  open: dialogProps.isDialogOpen,
-                  onSave: dialogProps.onDialogSave,
-                  onClose: dialogProps.onDialogClose
+                  isDialogOpen: dialogProps.isDialogOpen,
+                  onDialogSave: dialogProps.onDialogSave,
+                  onDialogClose: dialogProps.onDialogClose
                 })
               })}
             </ContentExtentionPanel>
