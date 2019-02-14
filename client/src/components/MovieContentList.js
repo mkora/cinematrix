@@ -91,13 +91,12 @@ class MovieContentList extends Component {
         isOpenSnack={isOpenSnack}
         onSnackClose={this.handleSnackCloseClick}
         onEditClick={onDialogEditClick}
-        dialogProps={{
-          isDialogOpen,
-          onDialogSave,
-          onDialogClose
-        }}
       >
-        <MovieContentForm />
+        <MovieContentForm 
+          isDialogOpen={isDialogOpen}
+          onDialogSave={onDialogSave}
+          onDialogClose={onDialogClose} 
+        />
       </ContentList>
     );
   }

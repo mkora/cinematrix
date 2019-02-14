@@ -65,13 +65,7 @@ class ContentList extends Component {
               data={d}
               onEditClick={onEditClick}
               >
-              {Children.map(children, child => {
-                return React.cloneElement(child, {
-                  isDialogOpen: dialogProps.isDialogOpen,
-                  onDialogSave: dialogProps.onDialogSave,
-                  onDialogClose: dialogProps.onDialogClose
-                })
-              })}
+              {children}
             </ContentExtentionPanel>
           )
         )}
@@ -88,7 +82,6 @@ ContentList.propTypes = {
   isOpenSnack: PropTypes.bool.isRequired,
   onSnackClose: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
-  dialogProps: PropTypes.object,
 };
 
 export default withStyles(styles)(ContentList);
