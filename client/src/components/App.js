@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   handleDialogClose = (e) => {
-    console.log(`Close dialog`);
     this.setState({
       isDialogOpen: false,
       checkedId: null,
@@ -41,13 +40,9 @@ class App extends Component {
   };
 
   handleDialogSave = (e) => {
-    const id = this.state.checkedId;
     this.setState({
       isDialogOpen: false,
-      checkedId: null,
     });
-    console.log(e);
-    console.log(`Save movie ${id}`);
   };
 
   render() {

@@ -88,12 +88,19 @@ class MovieContentForm extends Component {
     });
   };
 
+  handleSave = e => {
+    this.props.onDialogSave();
+    const id = this.state.checkedId;
+
+    console.log(e.target); // nope
+    console.log(`Save movie ${id}`);
+  }
+
   render() {
     const {
       fullScreenDialog,
       classes,
       isDialogOpen,
-      onDialogSave,
       onDialogClose,
     } = this.props;
     let dialogTop = (fullScreenDialog) ?
@@ -106,7 +113,7 @@ class MovieContentForm extends Component {
             <Typography variant="h6" color="inherit" className={classes.flex}>
               Add movie
             </Typography>
-            <Button color="inherit" onClick={onDialogSave}>
+            <Button color="inherit" onClick={this.handleSave}>
               Save
             </Button>
           </Toolbar>
@@ -129,7 +136,7 @@ class MovieContentForm extends Component {
             Cancel
           </Button>
           <Button
-            onClick={onDialogSave}
+            onClick={this.handleSave}
             color="primary"
           >
             Save
