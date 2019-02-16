@@ -91,9 +91,12 @@ class MovieContentForm extends Component {
   handleSave = e => {
     this.props.onDialogSave();
     const id = this.state.checkedId;
+    console.log(id);
+    // Create object to save from this.state
+  }
 
-    console.log(e.target); // nope
-    console.log(`Save movie ${id}`);
+  componentDidMount() {
+    // how to get id or data from parent component?
   }
 
   render() {

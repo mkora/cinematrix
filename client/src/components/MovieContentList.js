@@ -18,6 +18,11 @@ class MovieContentList extends Component {
     });
   };
 
+  handleEditClick = id => e => {
+    this.props.onDialogEditClick();
+    console.log(id);
+  }
+
   async componentDidMount() {
     try {
       const data = await movies();
@@ -80,7 +85,6 @@ class MovieContentList extends Component {
       isDialogOpen,
       onDialogSave,
       onDialogClose,
-      onDialogEditClick
     } = this.props;
 
     return (
@@ -90,7 +94,7 @@ class MovieContentList extends Component {
         isError={isError}
         isOpenSnack={isOpenSnack}
         onSnackClose={this.handleSnackCloseClick}
-        onEditClick={onDialogEditClick}
+        onEditClick={this.handleEditClick}
       >
         <MovieContentForm 
           isDialogOpen={isDialogOpen}

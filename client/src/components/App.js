@@ -22,11 +22,10 @@ const styles = theme => ({
 class App extends Component {
 
   state = {
-    isDialogOpen: false,
-    checkedId: null,    
+    isDialogOpen: false, 
   };
 
-  handleEditClick = (id) => (e) => {
+  handleEditClick = (e) => {
     this.setState({
       isDialogOpen: true,
     });
@@ -35,7 +34,6 @@ class App extends Component {
   handleDialogClose = (e) => {
     this.setState({
       isDialogOpen: false,
-      checkedId: null,
     });
   };
 
