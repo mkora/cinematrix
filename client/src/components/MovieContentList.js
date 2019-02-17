@@ -6,6 +6,7 @@ import MovieContentForm from './MovieContentForm';
 
 class MovieContentList extends Component {
   state = {
+    clickedId: null,
     data: [],
     isError: false,
     isLoading: false,
@@ -20,14 +21,16 @@ class MovieContentList extends Component {
 
   handleEditClick = id => e => {
     this.props.onDialogEditClick();
-    console.log(id);
+    this.setState({
+      clickedId: id,
+    });
   }
 
   async componentDidMount() {
     try {
       const data = await movies();
       if(data.success) {
-        const list = data.data.map((v) => {
+        const list = data.data.map(v => {
           const isMovie = v.episodes === 1;
           return {
             heading: v.title,
@@ -53,12 +56,14 @@ class MovieContentList extends Component {
           isError: false,
           isLoading: false,
           isOpenSnack: false,
+          clickedId: null,
         });
       } else {
         this.setState({
           isError: true,
           isLoading: false,
           isOpenSnack: true,
+          clickedId: null,
         });
         console.log(data.error);
       }
@@ -67,6 +72,7 @@ class MovieContentList extends Component {
         isError: true,
         isLoading: false,
         isOpenSnack: true,
+        clickedId: null,
       });
       console.log(err);
     }
@@ -79,6 +85,7 @@ class MovieContentList extends Component {
       isLoading,
       isError,
       isOpenSnack,
+      clickedId,
     } = this.state;
 
     const {
@@ -99,7 +106,8 @@ class MovieContentList extends Component {
         <MovieContentForm 
           isDialogOpen={isDialogOpen}
           onDialogSave={onDialogSave}
-          onDialogClose={onDialogClose} 
+          onDialogClose={onDialogClose}
+          clickedId={clickedId}
         />
       </ContentList>
     );

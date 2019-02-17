@@ -80,6 +80,7 @@ class MovieContentForm extends Component {
     duration: 35,
     synopsis: '',
     source: '',
+    id:'',
   }
 
   handleChange = name => event => {
@@ -90,13 +91,17 @@ class MovieContentForm extends Component {
 
   handleSave = e => {
     this.props.onDialogSave();
-    const id = this.state.checkedId;
-    console.log(id);
+    const id = this.state.id;
+
     // Create object to save from this.state
+    // Call api
   }
 
-  componentDidMount() {
-    // how to get id or data from parent component?
+  componentDidMount() { // <--- different method not mount, but when?
+
+    console.log('Our object ID: ' + this.props.clickedId);
+    // Call api && fill out all the field in state + id
+
   }
 
   render() {
@@ -293,6 +298,7 @@ MovieContentForm.propTypes = {
   isDialogOpen: PropTypes.bool.isRequired,
   onDialogClose: PropTypes.func.isRequired,
   onDialogSave: PropTypes.func.isRequired,
+  clickedId: PropTypes.string,
 };
 
 MovieContentForm.defaultProps = {
