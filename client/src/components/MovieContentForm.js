@@ -97,20 +97,15 @@ class MovieContentForm extends Component {
     // Call api
   }
 
-  componentDidMount() { // <--- different method not mount, but when?
-
-    console.log('Our object ID: ' + this.props.clickedId);
-    // Call api && fill out all the field in state + id
-
-  }
-
   render() {
     const {
       fullScreenDialog,
       classes,
       isDialogOpen,
       onDialogClose,
+      data,
     } = this.props;
+
     let dialogTop = (fullScreenDialog) ?
       (
         <AppBar className={classes.appBar}>
@@ -151,6 +146,8 @@ class MovieContentForm extends Component {
           </Button>
         </DialogActions>
       );
+
+// populate the form if data has been passed
 
     return (
       <Dialog
@@ -298,7 +295,7 @@ MovieContentForm.propTypes = {
   isDialogOpen: PropTypes.bool.isRequired,
   onDialogClose: PropTypes.func.isRequired,
   onDialogSave: PropTypes.func.isRequired,
-  clickedId: PropTypes.string,
+  data: PropTypes.object,
 };
 
 MovieContentForm.defaultProps = {

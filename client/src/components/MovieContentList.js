@@ -6,11 +6,12 @@ import MovieContentForm from './MovieContentForm';
 
 class MovieContentList extends Component {
   state = {
-    clickedId: null,
     data: [],
     isError: false,
     isLoading: false,
     isOpenSnack: false,
+    notFiltered: [],
+    selectedData: {},
   };
 
   handleSnackCloseClick = () => {
@@ -22,7 +23,7 @@ class MovieContentList extends Component {
   handleEditClick = id => e => {
     this.props.onDialogEditClick();
     this.setState({
-      clickedId: id,
+      selectedData: this.state.notFiltered.filter(v => (v._id === id)).pop(),
     });
   }
 
@@ -52,18 +53,19 @@ class MovieContentList extends Component {
           };
         });
         this.setState({
+          notFiltered: data.data,
+          selectedData: {},
           data: list,
           isError: false,
           isLoading: false,
           isOpenSnack: false,
-          clickedId: null,
         });
       } else {
         this.setState({
           isError: true,
           isLoading: false,
           isOpenSnack: true,
-          clickedId: null,
+          selectedData: {},
         });
         console.log(data.error);
       }
@@ -72,7 +74,7 @@ class MovieContentList extends Component {
         isError: true,
         isLoading: false,
         isOpenSnack: true,
-        clickedId: null,
+        selectedData: {},
       });
       console.log(err);
     }
@@ -85,7 +87,7 @@ class MovieContentList extends Component {
       isLoading,
       isError,
       isOpenSnack,
-      clickedId,
+      selectedData,
     } = this.state;
 
     const {
@@ -107,7 +109,7 @@ class MovieContentList extends Component {
           isDialogOpen={isDialogOpen}
           onDialogSave={onDialogSave}
           onDialogClose={onDialogClose}
-          clickedId={clickedId}
+          data={selectedData}
         />
       </ContentList>
     );
