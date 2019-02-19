@@ -95,6 +95,27 @@ class MovieContentForm extends Component {
 
     // Create object to save from this.state
     // Call api
+console.log(this.state);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const d = nextProps.data;
+    if (!d) {
+      return null;
+    }
+console.log(d);
+    return {
+      title: d.title,
+      alsoknown: d.alsoknown,
+      country: d.country,
+      year: d.year,
+      imdb: d.imdb,//.$numberDecimal,
+      episodes: d.episodes,
+      duration: d.duration,
+      synopsis: d.synopsis,
+      source: d.source,
+      id: d._id,
+    };
   }
 
   render() {
@@ -147,7 +168,9 @@ class MovieContentForm extends Component {
         </DialogActions>
       );
 
-// populate the form if data has been passed
+    if (data) {
+
+    }
 
     return (
       <Dialog

@@ -26,7 +26,6 @@ class ContentList extends Component {
       isOpenSnack,
       onSnackClose,
       onEditClick,
-      dialogProps,
       children,
     } = this.props;
 

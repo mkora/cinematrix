@@ -63,7 +63,6 @@ class ContentExtentionPanel extends Component {
       classes,
       data,
       onEditClick,
-      dialogProps,
       children
     } = this.props;
 
